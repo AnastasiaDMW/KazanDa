@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">KazanDa</string>
-    <string name="main_screen">Главная</string>
-    <string name="profile_screen">Профиль</string>
-    <string name="map_screen_1">Карта</string>
+    <string name="main_screen_title">Главная</string>
+    <string name="profile_screen_title">Профиль</string>
+    <string name="map_screen_title">Карта</string>
+    <string name="favorite_title">Избранное</string>
+    <string name="confirm_button">Подтвердить</string>
 </resources>

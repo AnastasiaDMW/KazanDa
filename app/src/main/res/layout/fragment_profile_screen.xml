@@ -6,14 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".fragments.profile.ProfileScreenFragment">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="265dp"
-        android:layout_height="59dp"
-        android:text="@string/profile_screen"
+    <ImageView
+        android:id="@+id/ivEdit"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_pencil_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/sub_color_2"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="336dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/circle" />
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="336dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/sub_color_2"
+        android:src="@drawable/ic_person_24" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        style="@style/DefaultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+        android:text="неизвестно" />
+
+    <TextView
+        android:id="@+id/tvName"
+        style="@style/DefaultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail"
+        android:text="Вася Пупкин" />
+
+    <TextView
+        android:id="@+id/tvFavorite"
+        style="@style/DefaultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="176dp"
+        android:text="Избранное"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

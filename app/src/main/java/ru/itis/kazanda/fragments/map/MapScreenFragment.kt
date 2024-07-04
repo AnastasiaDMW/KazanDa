@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import ru.itis.kazanda.R
-import ru.itis.kazanda.databinding.FragmentMapScreen1Binding
+import ru.itis.kazanda.databinding.FragmentMapScreenBinding
 
-class MapScreen1Fragment : Fragment(R.layout.fragment_map_screen_1) {
+class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
 
-    private var binding: FragmentMapScreen1Binding? = null
+    private var binding: FragmentMapScreenBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMapScreen1Binding.bind(view)
+        binding = FragmentMapScreenBinding.bind(view)
 
     }
 

@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="sub_color_1">#DED9FF</color> <!-- нижняя навигация, дефолтная аватарка-->
+    <color name="sub_color_2">#C293FF</color> <!-- обводка чего-нибудь, дефолтная иконка-->
 </resources>
