@@ -35,6 +35,10 @@ class EditScreenFragment : Fragment(R.layout.fragment_edit_screen) {
                     findNavController().navigate(R.id.action_editScreenFragment_to_profileScreenFragment)
                 }
             }
+
+            cancelButton.setOnClickListener {
+                findNavController().navigate(R.id.action_editScreenFragment_to_profileScreenFragment)
+            }
         }
     }
 

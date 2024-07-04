@@ -4,5 +4,6 @@
     <string name="profile_screen_title">Профиль</string>
     <string name="map_screen_title">Карта</string>
     <string name="favorite_title">Избранное</string>
-    <string name="confirm_button">Подтвердить</string>
+    <string name="confirm_button_text">Подтвердить</string>
+    <string name="cancel_button_text">Отмена</string>
 </resources>
