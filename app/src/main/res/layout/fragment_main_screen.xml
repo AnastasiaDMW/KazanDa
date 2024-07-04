@@ -10,7 +10,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="265dp"
         android:layout_height="59dp"
-        android:text="@string/main_screen"
+        android:text="@string/main_screen_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

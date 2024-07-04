@@ -4,16 +4,16 @@
     <item
         android:id="@+id/mainScreenFragment"
         android:icon="@drawable/ic_home_24"
-        android:title="@string/main_screen" />
+        android:title="@string/main_screen_title" />
 
     <item
         android:id="@+id/profileScreenFragment"
         android:icon="@drawable/ic_person_24"
-        android:title="@string/profile_screen" />
+        android:title="@string/profile_screen_title" />
 
     <item
-        android:id="@+id/mapScreen1Fragment"
+        android:id="@+id/searchScreenFragment"
         android:icon="@drawable/ic_map_24"
-        android:title="@string/map_screen_1" />
+        android:title="@string/map_screen_title" />
 
 </menu>

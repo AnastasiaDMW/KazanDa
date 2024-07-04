@@ -24,35 +24,35 @@
             android:id="@+id/action_detailScreenFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment" />
         <action
-            android:id="@+id/action_detailScreenFragment_to_profileScreenFragment2"
+            android:id="@+id/action_detailScreenFragment_to_profileScreenFragment"
             app:destination="@id/profileScreenFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mapScreen1Fragment"
-        android:name="ru.itis.kazanda.fragments.map.MapScreen1Fragment"
-        android:label="fragment_map_screen_1"
-        tools:layout="@layout/fragment_map_screen_1" >
+        android:id="@+id/searchScreenFragment"
+        android:name="ru.itis.kazanda.fragments.map.SearchScreenFragment"
+        android:label="fragment_search_screen"
+        tools:layout="@layout/fragment_search_screen" >
         <action
-            android:id="@+id/action_mapScreen1Fragment_to_mapScreen2Fragment"
-            app:destination="@id/mapScreen2Fragment" />
+            android:id="@+id/action_searchScreenFragment_to_loadingScreenFragment"
+            app:destination="@id/loadingScreenFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mapScreen2Fragment"
-        android:name="ru.itis.kazanda.fragments.map.MapScreen2Fragment"
-        android:label="fragment_map_screen_2"
-        tools:layout="@layout/fragment_map_screen_2" >
+        android:id="@+id/loadingScreenFragment"
+        android:name="ru.itis.kazanda.fragments.map.LoadingScreenFragment"
+        android:label="fragment_loading_screen"
+        tools:layout="@layout/fragment_loading_screen" >
         <action
-            android:id="@+id/action_mapScreen2Fragment_to_mapScreen3Fragment"
-            app:destination="@id/mapScreen3Fragment" />
+            android:id="@+id/action_loadingScreenFragment_to_mapScreenFragment"
+            app:destination="@id/mapScreenFragment" />
     </fragment>
     <fragment
-        android:id="@+id/mapScreen3Fragment"
-        android:name="ru.itis.kazanda.fragments.map.MapScreen3Fragment"
-        android:label="fragment_map_screen_3"
-        tools:layout="@layout/fragment_map_screen_3" >
+        android:id="@+id/mapScreenFragment"
+        android:name="ru.itis.kazanda.fragments.map.MapScreenFragment"
+        android:label="fragment_map_screen"
+        tools:layout="@layout/fragment_map_screen" >
         <action
-            android:id="@+id/action_mapScreen3Fragment_to_mapScreen1Fragment"
-            app:destination="@id/mapScreen1Fragment" />
+            android:id="@+id/action_mapScreenFragment_to_searchScreenFragment"
+            app:destination="@id/searchScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileScreenFragment"
