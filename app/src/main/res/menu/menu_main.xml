@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainScreenFragment"
+        android:icon="@drawable/ic_home_24"
+        android:title="@string/main_screen" />
+
+    <item
+        android:id="@+id/profileScreenFragment"
+        android:icon="@drawable/ic_person_24"
+        android:title="@string/profile_screen" />
+
+    <item
+        android:id="@+id/mapScreen1Fragment"
+        android:icon="@drawable/ic_map_24"
+        android:title="@string/map_screen_1" />
+
+</menu>

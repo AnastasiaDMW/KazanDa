@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mainScreenFragment">
+
+    <fragment
+        android:id="@+id/mainScreenFragment"
+        android:name="ru.itis.kazanda.fragments.main.MainScreenFragment"
+        android:label="fragment_main_screen"
+        tools:layout="@layout/fragment_main_screen" >
+        <action
+            android:id="@+id/action_mainScreenFragment_to_detailScreenFragment"
+            app:destination="@id/detailScreenFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailScreenFragment"
+        android:name="ru.itis.kazanda.fragments.main.DetailScreenFragment"
+        android:label="fragment_detail_screen"
+        tools:layout="@layout/fragment_detail_screen" >
+        <action
+            android:id="@+id/action_detailScreenFragment_to_mainScreenFragment"
+            app:destination="@id/mainScreenFragment" />
+        <action
+            android:id="@+id/action_detailScreenFragment_to_profileScreenFragment2"
+            app:destination="@id/profileScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapScreen1Fragment"
+        android:name="ru.itis.kazanda.fragments.map.MapScreen1Fragment"
+        android:label="fragment_map_screen_1"
+        tools:layout="@layout/fragment_map_screen_1" >
+        <action
+            android:id="@+id/action_mapScreen1Fragment_to_mapScreen2Fragment"
+            app:destination="@id/mapScreen2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapScreen2Fragment"
+        android:name="ru.itis.kazanda.fragments.map.MapScreen2Fragment"
+        android:label="fragment_map_screen_2"
+        tools:layout="@layout/fragment_map_screen_2" >
+        <action
+            android:id="@+id/action_mapScreen2Fragment_to_mapScreen3Fragment"
+            app:destination="@id/mapScreen3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapScreen3Fragment"
+        android:name="ru.itis.kazanda.fragments.map.MapScreen3Fragment"
+        android:label="fragment_map_screen_3"
+        tools:layout="@layout/fragment_map_screen_3" >
+        <action
+            android:id="@+id/action_mapScreen3Fragment_to_mapScreen1Fragment"
+            app:destination="@id/mapScreen1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileScreenFragment"
+        android:name="ru.itis.kazanda.fragments.profile.ProfileScreenFragment"
+        android:label="fragment_profile_screen"
+        tools:layout="@layout/fragment_profile_screen" >
+        <action
+            android:id="@+id/action_profileScreenFragment_to_editScreenFragment"
+            app:destination="@id/editScreenFragment" />
+        <action
+            android:id="@+id/action_profileScreenFragment_to_detailScreenFragment"
+            app:destination="@id/detailScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editScreenFragment"
+        android:name="ru.itis.kazanda.fragments.profile.EditScreenFragment"
+        android:label="fragment_edit_screen"
+        tools:layout="@layout/fragment_edit_screen" >
+        <action
+            android:id="@+id/action_editScreenFragment_to_profileScreenFragment"
+            app:destination="@id/profileScreenFragment" />
+    </fragment>
+</navigation>
