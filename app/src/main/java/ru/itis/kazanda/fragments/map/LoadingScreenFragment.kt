@@ -13,7 +13,6 @@ class LoadingScreenFragment : Fragment(R.layout.fragment_loading_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoadingScreenBinding.bind(view)
-
     }
 
     override fun onDestroyView() {

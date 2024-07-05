@@ -13,7 +13,6 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMapScreenBinding.bind(view)
-
     }
 
     override fun onDestroyView() {
