@@ -1,21 +1,26 @@
 package ru.itis.kazanda.fragments.profile
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import ru.itis.kazanda.R
 import ru.itis.kazanda.databinding.FragmentProfileScreenBinding
+import ru.itis.kazanda.fragments.main.Place
+import ru.itis.kazanda.fragments.main.PlaceAdapter
+import ru.itis.kazanda.fragments.main.PlaceRepository
 import java.io.File
+
 
 class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
 
     private var binding: FragmentProfileScreenBinding? = null
+    private lateinit var adapter: PlaceAdapter
+    private var places: List<Place> = PlaceRepository.places
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,11 +55,30 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
                 findNavController().navigate(R.id.action_profileScreenFragment_to_editScreenFragment)
             }
         }
+        initAdapter()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun initAdapter() {
+        adapter = PlaceAdapter(Glide.with(this@ProfileScreenFragment)) { place ->
+            val bundle = Bundle().apply {
+                putInt("placeId", place.id)
+            }
+            findNavController().navigate(
+                R.id.action_profileScreenFragment_to_detailScreenFragment,
+                bundle
+            )
+        }.apply {
+            submitList(places) //в полях класса у тебя places - в твоем случае сюда нужно список избранного подрубить
+        }
+        binding?.apply {
+            rvFavorite.adapter = adapter
+            rvFavorite.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
     companion object {

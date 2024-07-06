@@ -13,4 +13,6 @@
     <string name="descriptionIcon">Развернуть</string>
     <string name="working_hours">Время работы</string>
     <string name="filter">Фильтрация</string>
+    <string name="default_email">Неизвестно</string>
+    <string name="default_name">Вася Пупкин</string>
 </resources>

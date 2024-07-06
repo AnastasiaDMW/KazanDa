@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
-        android:text="неизвестно" />
+        android:text="@string/default_email" />
 
     <TextView
         android:id="@+id/tvName"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEmail"
-        android:text="Вася Пупкин" />
+        android:text="@string/default_name" />
 
     <TextView
         android:id="@+id/tvFavorite"
@@ -69,18 +69,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="176dp"
-        android:text="Избранное"
+        android:layout_marginBottom="200dp"
+        android:text="@string/favorite_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- <androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavorite"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvFavorite"
         tools:itemCount="2"
-        tools:listitem="@layout/item_place" /> -->
+        tools:listitem="@layout/item_place" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
