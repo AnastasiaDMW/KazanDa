@@ -7,4 +7,10 @@
     <string name="confirm_button_text">Подтвердить</string>
     <string name="hint_name">Имя</string>
     <string name="hint_email">E-mail</string>
+    <string name="description">Описание</string>
+    <string name="place_adress">Адрес</string>
+    <string name="back">Назад</string>
+    <string name="descriptionIcon">Развернуть</string>
+    <string name="working_hours">Время работы</string>
+    <string name="filter">Фильтрация</string>
 </resources>
