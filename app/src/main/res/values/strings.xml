@@ -3,4 +3,10 @@
     <string name="main_screen_title">Главная</string>
     <string name="profile_screen_title">Профиль</string>
     <string name="map_screen_title">Карта</string>
+    <string name="description">Описание</string>
+    <string name="place_adress">Адрес</string>
+    <string name="back">Назад</string>
+    <string name="descriptionIcon">Развернуть</string>
+    <string name="working_hours">Время работы</string>
+    <string name="filter">Фильтрация</string>
 </resources>
