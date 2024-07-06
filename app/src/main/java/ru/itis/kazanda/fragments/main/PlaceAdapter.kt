@@ -10,14 +10,14 @@ import ru.itis.kazanda.databinding.ItemPlaceBinding
 class PlaceAdapter(
     private val glide: RequestManager,
     private val onClick: (Place) -> Unit,
-) : ListAdapter<Place, PlaceViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<Place, PlaceViewHolder>(diffCallback) {
 
     init {
         setHasStableIds(true)
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Place>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<Place>() {
             override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
                 return oldItem.id == newItem.id
             }

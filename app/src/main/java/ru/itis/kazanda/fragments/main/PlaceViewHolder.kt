@@ -19,12 +19,7 @@ class PlaceViewHolder(
     fun onBind(place: Place) {
         binding.run {
             placeName.text = place.name
-            placePayment.text = when(place.payment){
-                0-> "free"
-                1->"$"
-                2->"$$"
-                else -> "$$$"
-            }
+            binding.placePayment.text = PaymentType.entries[place.payment].toString()
             glide
                 .load(place.imageUrls.split("\n")[0])
                 .error(R.drawable.baseline_photo_camera_back_24)

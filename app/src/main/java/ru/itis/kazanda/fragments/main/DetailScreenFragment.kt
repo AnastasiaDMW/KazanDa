@@ -20,16 +20,11 @@ class DetailScreenFragment : Fragment(R.layout.fragment_detail_screen) {
         val place = PlaceRepository.places.find { it.id == placeId } ?: return
 
         binding.placeName.text = place.name
-        binding.placePayment.text = when (place.payment) {
-            0 -> "free"
-            1 -> "$"
-            2 -> "$$"
-            else -> "$$$"
-        }
+        binding.placePayment.text = PaymentType.entries[place.payment].toString()
         binding.placeAddress.text = place.address
         binding.placeHours.text = place.hours
         binding.placeDescription.text = place.description
-        setupImageCarousel()
+        setupImageCarousel(place)
         binding.toggleDescriptionIcon.setOnClickListener {
             if (binding.placeDescription.visibility == View.GONE) {
                 binding.placeDescription.visibility = View.VISIBLE
@@ -43,11 +38,9 @@ class DetailScreenFragment : Fragment(R.layout.fragment_detail_screen) {
             findNavController().popBackStack()
         }
     }
-    private fun setupImageCarousel() {
-        val placeId = arguments?.getInt("placeId") ?: return
-        val place = PlaceRepository.places.find { it.id == placeId } ?: return
-        val images = place.imageUrls.split("\n").filter { it.isNotBlank() }
 
+    private fun setupImageCarousel(place: Place) {
+        val images = place.imageUrls.split("\n").filter { it.isNotBlank() }
         binding.photoViewPager.adapter = ImageSliderAdapter(images)
         binding.photoViewPager.offscreenPageLimit = 1
         val compositePageTransformer = CompositePageTransformer().apply {
@@ -61,100 +54,5 @@ class DetailScreenFragment : Fragment(R.layout.fragment_detail_screen) {
         binding.photoViewPager.setPageTransformer(compositePageTransformer)
         binding.photoViewPager.setCurrentItem(Integer.MAX_VALUE / 2, false)
     }
-
-    /*    private fun setupImageCarousel() {
-            val placeId = arguments?.getInt("placeId") ?: return
-            val place = PlaceRepository.places.find { it.id == placeId } ?: return
-            val images = place.imageUrls.split("\n").filter { it.isNotBlank() }
-
-            binding.photoViewPager.adapter = ImageSliderAdapter(images)
-            binding.photoViewPager.offscreenPageLimit = 1
-            val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.viewpager_margin)
-            val screenWidth = resources.displayMetrics.widthPixels
-
-            val imageViewWidth = (screenWidth * 0.75).toInt()
-            val imageViewHeight = (imageViewWidth * 3 / 4)
-
-            binding.photoViewPager.setPadding((screenWidth - imageViewWidth) / 2, 0, (screenWidth - imageViewWidth) / 2, 0)
-            binding.photoViewPager.clipToPadding = false
-            binding.photoViewPager.clipChildren = false
-
-            val compositePageTransformer = CompositePageTransformer().apply {
-                addTransformer(MarginPageTransformer(pageMarginPx))
-                addTransformer { page, position ->
-                    val r: Float = 1 - abs(position)
-                    page.scaleY = 0.6f + r * 0.4f
-                    page.translationX = -(imageViewWidth / 2) * position
-                    page.alpha = 0.25f + r * 0.75f
-                    page.layoutParams.width = imageViewWidth
-                    page.layoutParams.height = imageViewHeight
-                    page.requestLayout()
-                }
-            }
-            binding.photoViewPager.setPageTransformer(compositePageTransformer)
-            binding.photoViewPager.setCurrentItem(Integer.MAX_VALUE / 2, false)
-        }
-        private fun setupImageCarousel() {
-            val placeId = arguments?.getInt("placeId") ?: return
-            val place = PlaceRepository.places.find { it.id == placeId } ?: return
-            val images = place.imageUrls.split("\n").filter { it.isNotBlank() }
-
-            binding.photoViewPager.adapter = ImageSliderAdapter(images)
-            binding.photoViewPager.offscreenPageLimit = 1
-            val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.viewpager_margin)
-            val pageWidth = binding.photoViewPager.width
-            val screenWidth = resources.displayMetrics.widthPixels
-
-            binding.photoViewPager.setPadding(screenWidth / 3, 0, screenWidth / 3, 0)
-            binding.photoViewPager.clipToPadding = false
-            binding.photoViewPager.clipChildren = false
-
-            val compositePageTransformer = CompositePageTransformer().apply {
-                addTransformer(MarginPageTransformer(pageMarginPx))
-                addTransformer { page, position ->
-                    val r: Float = 1 - Math.abs(position)
-                    page.scaleY = 0.6f + r * 0.4f // Уменьшенный масштаб для текущего фото
-                    page.translationX = -pageWidth / 2 * position
-                    page.alpha = 0.25f + r * 0.75f
-                }
-            }
-            binding.photoViewPager.setPageTransformer(compositePageTransformer)
-            binding.photoViewPager.setCurrentItem(Integer.MAX_VALUE / 2, false)
-        }*/
-    /*    private fun setupImageCarousel() {
-            val placeId = arguments?.getInt("placeId") ?: return
-            val place = PlaceRepository.places.find { it.id == placeId } ?: return
-            val images = place.imageUrls.split("\n").filter { it.isNotBlank() }
-
-            binding.photoViewPager.adapter = ImageSliderAdapter(images)
-            binding.photoViewPager.offscreenPageLimit = 1
-            val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.viewpager_margin)
-            val screenWidth = resources.displayMetrics.widthPixels
-
-            val imageViewWidth = (screenWidth * 0.5).toInt()
-            val imageViewHeight = (imageViewWidth * 3 / 4)
-
-            binding.photoViewPager.setPadding((screenWidth - imageViewWidth) / 2, 0, (screenWidth - imageViewWidth) / 2, 0)
-            binding.photoViewPager.clipToPadding = false
-            binding.photoViewPager.clipChildren = false
-
-            val compositePageTransformer = CompositePageTransformer().apply {
-                addTransformer(MarginPageTransformer(pageMarginPx))
-                addTransformer { page, position ->
-                    val r: Float = 1 - abs(position)
-                    page.scaleY = 0.6f + r * 0.4f
-                    page.translationX = -(imageViewWidth / 2) * position
-                    page.alpha = 0.25f + r * 0.75f
-                    page.layoutParams.width = imageViewWidth
-                    page.layoutParams.height = imageViewHeight
-                    page.requestLayout()
-                    if (position != 0f) {
-                        page.translationX += position * pageMarginPx
-                    }
-                }
-            }
-            binding.photoViewPager.setPageTransformer(compositePageTransformer)
-            binding.photoViewPager.setCurrentItem(Integer.MAX_VALUE / 2, false)
-        }*/
 
 }
