@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import ru.itis.kazanda.R
 import ru.itis.kazanda.databinding.FragmentProfileScreenBinding
-import ru.itis.kazanda.fragments.main.Place
-import ru.itis.kazanda.fragments.main.PlaceAdapter
 import ru.itis.kazanda.fragments.main.PlaceRepository
 import java.io.File
 
@@ -19,8 +17,7 @@ import java.io.File
 class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
 
     private var binding: FragmentProfileScreenBinding? = null
-    private lateinit var adapter: PlaceAdapter
-    private var places: List<Place> = PlaceRepository.places
+    private var adapter: FavoritePlaceAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,7 +28,6 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
         val imagePath = File(filesDir, "image.png")
 
         binding?.apply {
-
             pref?.getString(ARG_NAME, "Вася Пупкин")
                 ?.takeIf { it.isNotEmpty() }
                 ?.let {
@@ -42,7 +38,6 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
                 ?.let {
                     tvEmail.text = it
                 }
-
             if (imagePath.exists()) {
                 Glide.with(requireContext())
                     .load(Uri.fromFile(imagePath))
@@ -50,11 +45,11 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
                     .into(ivAvatar)
                 ivIcon.setVisibility(View.INVISIBLE)
             }
-
             ivEdit.setOnClickListener {
                 findNavController().navigate(R.id.action_profileScreenFragment_to_editScreenFragment)
             }
         }
+
         initAdapter()
     }
 
@@ -64,18 +59,20 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
     }
 
     private fun initAdapter() {
-        adapter = PlaceAdapter(Glide.with(this@ProfileScreenFragment)) { place ->
-            val bundle = Bundle().apply {
-                putInt("placeId", place.id)
-            }
-            findNavController().navigate(
-                R.id.action_profileScreenFragment_to_detailScreenFragment,
-                bundle
-            )
-        }.apply {
-            submitList(places) //в полях класса у тебя places - в твоем случае сюда нужно список избранного подрубить
-        }
         binding?.apply {
+            adapter = FavoritePlaceAdapter(
+                list = PlaceRepository.places,
+                glide = Glide.with(this@ProfileScreenFragment),
+                onClick = {
+                    val bundle = Bundle().apply {
+                        putInt("placeId", it.id)
+                    }
+                    findNavController().navigate(
+                        R.id.action_profileScreenFragment_to_detailScreenFragment,
+                        bundle
+                    )
+                }
+            )
             rvFavorite.adapter = adapter
             rvFavorite.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
