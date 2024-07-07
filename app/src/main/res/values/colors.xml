@@ -5,4 +5,7 @@
     <color name="sub_color_1">#DED9FF</color> <!-- нижняя навигация, дефолтная аватарка-->
     <color name="sub_color_2">#C293FF</color> <!-- обводка чего-нибудь, дефолтная иконка-->
     <color name="purple">#5C00FF</color>
+    <color name="button_fav_unactivated">#9747FF</color>
+    <color name="button_fav_activated">#C293FF</color>
+    <color name="light_grey">#797979</color>
 </resources>

@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/tvEmail"
-        style="@style/DefaultText"
+        style="@style/EmailProfileText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -54,7 +54,7 @@
 
     <TextView
         android:id="@+id/tvName"
-        style="@style/DefaultText"
+        style="@style/NameProfileText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -65,11 +65,11 @@
 
     <TextView
         android:id="@+id/tvFavorite"
-        style="@style/DefaultText"
+        style="@style/BoldTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="168dp"
         android:text="@string/favorite_title"
         app:layout_constraintStart_toStartOf="@+id/rvFavorite"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
