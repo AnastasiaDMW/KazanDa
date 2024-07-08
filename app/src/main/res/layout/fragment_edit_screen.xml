@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/sub_color_2"
+        app:tint="@color/input_background"
         android:src="@drawable/ic_person_24" />
 
     <ImageView
@@ -37,7 +37,7 @@
         android:src="@drawable/ic_add_photo_24"
         app:layout_constraintStart_toEndOf="@+id/ivIcon"
         app:layout_constraintTop_toTopOf="@+id/ivIcon"
-        app:tint="@color/sub_color_2" />
+        app:tint="@color/main_button_text" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
