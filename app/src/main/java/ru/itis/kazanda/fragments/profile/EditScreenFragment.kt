@@ -157,7 +157,7 @@ class EditScreenFragment : Fragment(R.layout.fragment_edit_screen) {
                 if (selectedImage != null) {
                     /*Нужно обратить внимание на версию телефона андроид,
                     т.к. процессы доступа к галерее зависят от версии*/
-                    if (Build.VERSION.SDK_INT >= 28) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) { //28
                         //тут мы используем декодер, более современный и гибкий способ декодирования изображений
                         val source = ImageDecoder.createSource(it.contentResolver, selectedImage!!)
                         selectedBitmap = ImageDecoder.decodeBitmap(source)
