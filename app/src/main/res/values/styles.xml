@@ -44,8 +44,10 @@
         <item name="android:gravity">left</item>
     </style>
 
-    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+    <style name="AppCustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/bottom_dialog_button</item>
     </style>
+
+
 
 </resources>

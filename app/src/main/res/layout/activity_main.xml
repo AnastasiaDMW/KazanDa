@@ -22,11 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backgroundTint="@color/bottom_nav_text_background"
-
         app:itemTextColor="@color/icons_and_common_text"
         app:itemIconTint="@color/icons_and_common_text"
         app:itemRippleColor="#95EADDFF"
-        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
+        app:itemActiveIndicatorStyle="@style/AppCustomIndicator"
         app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main" />
