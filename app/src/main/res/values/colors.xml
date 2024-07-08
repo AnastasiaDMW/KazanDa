@@ -8,4 +8,14 @@
     <color name="button_fav_unactivated">#9747FF</color>
     <color name="button_fav_activated">#C293FF</color>
     <color name="light_grey">#797979</color>
+
+    <color name="primary_surface">#DED9FF</color> <!-- нижняя навигация -->
+    <color name="on_primary_surface">#353164</color>
+    <color name="on_primary_surface_bright">#9E00FF</color> <!-- яркие надписи на детальном экране -->
+    <color name="secondary_surface">#F4F2FF</color> <!-- любая строка ввода, иконка в кружочке -->
+    <color name="primary_container">#EADDFF</color> <!-- кнопки в нижнем окне на страничке с картой -->
+    <color name="primary">#65558F</color> <!-- кнопки основные -->
+    <color name="on_primary">#FFFFFF</color> <!-- цвет на основной кнопке(+бэкграунд) -->
+    <color name="primary_surface_highest">#B6B1C8</color> <!-- Лупа, подсказки и бледные надписи в строках ввода -->
+    <color name="primary_surface_high">#D1CBEB</color> <!-- цвет кружочка в профиле -->
 </resources>
