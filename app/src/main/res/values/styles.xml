@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="DefaultText">
-        <item name="android:textSize">20sp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
-    </style>
 
     <style name="BoldTitle">
         <item name="android:textSize">18sp</item>
@@ -32,13 +27,21 @@
     <style name="EmailProfileText">
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/light_grey</item>
+        <item name="android:textColor">@color/no_accent_elements</item>
     </style>
 
     <style name="NameProfileText">
         <item name="android:textSize">32sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/icons_and_common_text</item>
+    </style>
+
+    <style name="FavoriteTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/icons_and_common_text</item>
+        <item name="android:gravity">left</item>
     </style>
 
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragments.profile.ProfileScreenFragment">
 
     <ImageView
@@ -15,7 +16,7 @@
         android:src="@drawable/ic_pencil_24"
         app:layout_constraintBottom_toTopOf="@+id/ivAvatar"
         app:layout_constraintStart_toEndOf="@+id/ivAvatar"
-        app:tint="@color/sub_color_2" />
+        app:tint="@color/main_button_text" />
 
     <ImageView
         android:id="@+id/ivAvatar"
@@ -38,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/sub_color_2"
+        app:tint="@color/input_background"
         android:src="@drawable/ic_person_24" />
 
     <TextView
@@ -65,7 +66,7 @@
 
     <TextView
         android:id="@+id/tvFavorite"
-        style="@style/BoldTitle"
+        style="@style/FavoriteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
