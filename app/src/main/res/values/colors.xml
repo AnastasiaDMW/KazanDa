@@ -9,13 +9,13 @@
     <color name="button_fav_activated">#C293FF</color>
     <color name="light_grey">#797979</color>
 
-    <color name="bottom_nav">#DED9FF</color> <!-- primary_surface - нижняя навигация -->
+    <color name="bottom_nav_text_background">#DED9FF</color> <!-- primary_surface - нижняя навигация + фон текста на детальном экране -->
     <color name="icons_and_common_text">#353164</color> <!-- on_primary_surface -->
     <color name="bright_purple_detail_screen">#9E00FF</color> <!-- on_primary_surface_bright - яркие надписи на детальном экране -->
     <color name="input_background">#F4F2FF</color> <!-- secondary_surface - любая строка ввода, иконка в кружочке -->
     <color name="bottom_dialog_button">#EADDFF</color> <!-- primary_container - кнопки в нижнем окне на страничке с картой -->
-    <color name="common_button">#65558F</color> <!-- primary - кнопки основные -->
-    <color name="text_on_common_button">#FFFFFF</color> <!-- on_primary - цвет на основной кнопке(+бэкграунд) -->
+    <color name="main_button_text">#65558F</color> <!-- primary - кнопки основные + основной текст -->
+    <color name="text_on_main_button">#FFFFFF</color> <!-- on_primary - цвет на основной кнопке(+бэкграунд) -->
     <color name="no_accent_elements">#B6B1C8</color> <!-- primary_surface_highest - Лупа, подсказки и бледные надписи в строках ввода -->
     <color name="circle_profile">#D1CBEB</color> <!-- primary_surface_high - цвет кружочка в профиле -->
 </resources>
