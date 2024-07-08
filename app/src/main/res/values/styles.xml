@@ -48,6 +48,20 @@
         <item name="android:color">@color/bottom_dialog_button</item>
     </style>
 
+    <style name="CustomTextInputLayout" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/input_background</item>
+        <item name="android:textColorHint">@color/no_accent_elements</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
 
+    <style name="ThemeOverlay.MyApp" parent="ThemeOverlay.MaterialComponents.TextInputEditText">
+        <item name="colorPrimary">@color/bright_purple_detail_screen</item>
+        <item name="colorControlNormal">@color/bright_purple_detail_screen</item>
+    </style>
 
 </resources>

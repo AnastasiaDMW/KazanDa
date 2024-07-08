@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragments.profile.EditScreenFragment">
 
     <ImageView
@@ -41,7 +42,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        style="@style/CustomTextInputLayout"
+        android:theme="@style/ThemeOverlay.MyApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -61,7 +63,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        style="@style/CustomTextInputLayout"
+        android:theme="@style/ThemeOverlay.MyApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
