@@ -28,6 +28,7 @@
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/no_accent_elements</item>
+        <item name="fontFamily">@font/font_montserrat_regular</item>
     </style>
 
     <style name="NameProfileText">
@@ -35,6 +36,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/icons_and_common_text</item>
+        <item name="fontFamily">@font/font_montserrat_regular</item>
     </style>
 
     <style name="FavoriteTitle">
@@ -42,6 +44,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/icons_and_common_text</item>
         <item name="android:gravity">left</item>
+        <item name="fontFamily">@font/font_montserrat_regular</item>
     </style>
 
     <style name="AppCustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
@@ -62,6 +65,7 @@
     <style name="ThemeOverlay.MyApp" parent="ThemeOverlay.MaterialComponents.TextInputEditText">
         <item name="colorPrimary">@color/bright_purple_detail_screen</item>
         <item name="colorControlNormal">@color/bright_purple_detail_screen</item>
+        <item name="fontFamily">@font/font_montserrat_regular</item>
     </style>
 
 </resources>

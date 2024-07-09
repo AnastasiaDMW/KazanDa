@@ -12,10 +12,14 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="56dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="56dp"
         android:src="@drawable/ic_pencil_24"
         app:layout_constraintBottom_toTopOf="@+id/ivAvatar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/main_button_text" />
 
     <ImageView
@@ -70,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="160dp"
         android:text="@string/favorite_title"
         app:layout_constraintStart_toStartOf="@+id/rvFavorite"
         app:layout_constraintTop_toBottomOf="@+id/tvName" />
