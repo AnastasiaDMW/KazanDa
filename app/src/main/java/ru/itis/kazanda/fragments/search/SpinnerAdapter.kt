@@ -1,4 +1,4 @@
-package ru.itis.kazanda.fragments.map
+package ru.itis.kazanda.fragments.search
 
 import android.content.Context
 import android.view.LayoutInflater

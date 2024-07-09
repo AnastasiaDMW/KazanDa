@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchScreenFragment"
-        android:name="ru.itis.kazanda.fragments.map.SearchScreenFragment"
+        android:name="ru.itis.kazanda.fragments.search.SearchScreenFragment"
         android:label="fragment_search_screen"
         tools:layout="@layout/fragment_search_screen" >
         <action

@@ -1,14 +1,12 @@
-package ru.itis.kazanda.fragments.map
+package ru.itis.kazanda.fragments.search
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ru.itis.kazanda.R
 import ru.itis.kazanda.databinding.FragmentSearchScreenBinding
+import ru.itis.kazanda.fragments.map.MapScreenFragment
 
 class SearchScreenFragment : Fragment(R.layout.fragment_search_screen) {
 

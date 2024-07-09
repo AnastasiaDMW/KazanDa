@@ -1,4 +1,4 @@
-package ru.itis.kazanda.fragments.map
+package ru.itis.kazanda.fragments.search
 
 import androidx.lifecycle.ViewModel
 import ru.itis.kazanda.R
