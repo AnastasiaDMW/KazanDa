@@ -47,6 +47,14 @@
         <item name="fontFamily">@font/font_montserrat_regular</item>
     </style>
 
+    <style name="SearchScreenTitle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/icons_and_common_text</item>
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/font_montserrat_regular</item>
+    </style>
+
     <style name="AppCustomIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/bottom_dialog_button</item>
     </style>
@@ -71,4 +79,5 @@
     <style name="CustomDialogTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
 </resources>
