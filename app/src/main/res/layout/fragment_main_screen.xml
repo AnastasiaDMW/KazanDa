@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".fragments.main.MainScreenFragment">
 
     <LinearLayout
@@ -16,19 +17,22 @@
 
         <SearchView
             android:id="@+id/searchView"
-            style="@style/RoundedSearchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:layout_weight="1"
+            android:background="@drawable/rounded_searchview_background"
             android:gravity="center_vertical"
             android:layoutDirection="rtl" />
 
         <ImageButton
             android:id="@+id/filterButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
             android:contentDescription="@string/filter"
-            android:src="@drawable/baseline_filter_list_24" />
+            android:src="@drawable/baseline_filter_list_24"
+            app:tint="@color/icons_and_common_text" />
 
     </LinearLayout>
 

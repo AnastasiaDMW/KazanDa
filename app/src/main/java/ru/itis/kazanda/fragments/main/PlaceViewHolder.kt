@@ -1,5 +1,6 @@
 package ru.itis.kazanda.fragments.main
 
+import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -26,10 +27,38 @@ class PlaceViewHolder(
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .apply(requestOptions)
                 .into(placeImage)
+            val isFavorite = readFavoriteState(place.id)
+            setFavoriteIcon(isFavorite)
 
+            favoriteIcon.setOnClickListener {
+                val newFavoriteState = !place.isFavorite
+                place.isFavorite = newFavoriteState
+                setFavoriteIcon(newFavoriteState)
+                saveFavoriteState(place.id, newFavoriteState)
+                true
+            }
             root.setOnClickListener {
                 onClick(place)
             }
         }
+    }
+    private fun setFavoriteIcon(isFavorite: Boolean) {
+        binding.favoriteIcon.setImageResource(
+            if (isFavorite) R.drawable.ic_favorite_heart_filled
+            else R.drawable.ic_favorite_heart_empty
+        )
+    }
+
+    private fun saveFavoriteState(placeId: Int, isFavorite: Boolean) {
+        val sharedPreferences = itemView.context.getSharedPreferences("Favorites", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putBoolean(placeId.toString(), isFavorite)
+            apply()
+        }
+    }
+
+    private fun readFavoriteState(placeId: Int): Boolean {
+        val sharedPreferences = itemView.context.getSharedPreferences("Favorites", Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean(placeId.toString(), false)
     }
 }

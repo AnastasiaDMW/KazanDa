@@ -52,4 +52,20 @@ class PlaceAdapter(
         }
         submitList(filteredPlaces)
     }
+    fun filterByPayment(checkedItems: BooleanArray) {
+        val paymentRanges = listOf(0, 1, 2, 3)
+        val filteredList =
+            if (checkedItems.any { it }) {
+                PlaceRepository.places.filter { place ->
+                    checkedItems.indices.any { index ->
+                        val minPrice = if (index == 0) 0 else paymentRanges[index - 1] + 1
+                        val maxPrice = paymentRanges[index]
+                        place.payment in minPrice..maxPrice && checkedItems[index]
+                    }
+                }
+            } else {
+                PlaceRepository.places
+            }
+        submitList(filteredList)
+    }
 }

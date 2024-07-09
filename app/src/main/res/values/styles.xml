@@ -44,4 +44,15 @@
     <style name="CustomDialogTheme">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+    <style name="RoundedDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_rounded_dialog</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/AlertDialogButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/AlertDialogButtonStyle</item>
+        <item name="colorControlActivated">@color/button_fav_unactivated</item>
+        <item name="colorControlNormal">@color/button_fav_activated</item>
+    </style>
+
+    <style name="AlertDialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/bright_purple_detail_screen</item>
+    </style>
 </resources>
