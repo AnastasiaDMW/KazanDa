@@ -35,7 +35,7 @@
         android:gravity="center"
         android:paddingTop="4dp"
         android:textSize="16sp"
-        tools:text="Name" />
+        tools:text="Название" />
 
     <TextView
         android:id="@+id/placePayment"
@@ -43,6 +43,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="14sp"
-        tools:text="payment"
+        tools:text="Стоимость"
         android:textColor="@color/icons_and_common_text"/>
 </LinearLayout>

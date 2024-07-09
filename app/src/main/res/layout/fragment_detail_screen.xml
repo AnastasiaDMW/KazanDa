@@ -33,7 +33,8 @@
             android:gravity="center"
             android:paddingTop="8dp"
             android:textSize="24sp"
-            tools:text="Name" />
+            android:textColor="@color/icons_and_common_text"
+            tools:text="Название" />
 
         <TextView
             android:id="@+id/placePayment"
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:textSize="18sp"
+            android:textColor="@color/no_accent_elements"
             tools:text="free" />
 
         <LinearLayout
@@ -129,6 +131,7 @@
                 android:paddingTop="4dp"
                 android:text="@string/description"
                 android:textSize="14sp"
+                android:textColor="@color/icons_and_common_text"
                 android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
