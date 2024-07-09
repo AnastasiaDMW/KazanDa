@@ -47,7 +47,8 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center|top"
                 android:scaleType="center"
-                android:src="@drawable/lucide_minus" />
+                android:src="@drawable/lucide_minus"
+                app:tint="@color/icons_and_common_text"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clBottomSheetContainer"
@@ -79,13 +80,12 @@
 
                 <TextView
                     android:id="@+id/tvTitile"
+                    style="@style/PlaceTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:layout_marginTop="16dp"
                     android:textSize="18sp"
                     android:layout_marginStart="8dp"
-                    android:textStyle="bold"
                     android:maxLines="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cardPlace"
@@ -93,9 +93,9 @@
 
                 <TextView
                     android:id="@+id/tvPrice"
+                    style="@style/PlacePrice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:layout_marginStart="8dp"
                     android:textSize="16sp"
                     android:layout_marginTop="8dp"
@@ -105,9 +105,9 @@
 
                 <TextView
                     android:id="@+id/tvTime"
+                    style="@style/AccentInfo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="8dp"
@@ -117,11 +117,10 @@
 
                 <Button
                     android:id="@+id/btnDescription"
+                    style="@style/MainButtonTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Подробнее"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:text="@string/more_info_button"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/button_background"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -130,11 +129,10 @@
 
                 <Button
                     android:id="@+id/btnRoute"
+                    style="@style/MainButtonTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Построить маршрут"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:text="@string/find_the_way_button"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/button_background"
                     app:layout_constraintEnd_toEndOf="parent"
