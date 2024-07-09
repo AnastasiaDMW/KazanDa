@@ -91,6 +91,7 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                                 if (filteredList != null) {
                                     displayPlacemarksOnMap(filteredList)
                                 } else {
+                                    Snackbar.make(root, "Рядом с вами ничего нет(", Snackbar.LENGTH_SHORT).show()
                                     Log.d("DisplayPlacemarksOnMap", "filteredList is null")
                                 }
                             }
