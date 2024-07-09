@@ -37,16 +37,7 @@
         android:label="fragment_search_screen"
         tools:layout="@layout/fragment_search_screen" >
         <action
-            android:id="@+id/action_searchScreenFragment_to_loadingScreenFragment"
-            app:destination="@id/loadingScreenFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loadingScreenFragment"
-        android:name="ru.itis.kazanda.fragments.map.LoadingScreenFragment"
-        android:label="fragment_loading_screen"
-        tools:layout="@layout/fragment_loading_screen" >
-        <action
-            android:id="@+id/action_loadingScreenFragment_to_mapScreenFragment"
+            android:id="@+id/action_searchScreenFragment_to_mapScreenFragment"
             app:destination="@id/mapScreenFragment" />
     </fragment>
     <fragment
@@ -57,6 +48,9 @@
         <action
             android:id="@+id/action_mapScreenFragment_to_searchScreenFragment"
             app:destination="@id/searchScreenFragment" />
+        <action
+            android:id="@+id/action_mapScreenFragment_to_detailScreenFragment"
+            app:destination="@id/detailScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileScreenFragment"
