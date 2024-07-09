@@ -1,5 +1,6 @@
 package ru.itis.kazanda
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,10 +20,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = ActivityMainBinding.inflate(layoutInflater).also {
-            setContentView(it.root)
-        }
+                setContentView(it.root)
+            }
 
         controller = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment)
             .navController
