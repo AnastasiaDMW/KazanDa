@@ -68,4 +68,7 @@
         <item name="fontFamily">@font/font_montserrat_regular</item>
     </style>
 
+    <style name="CustomDialogTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>
