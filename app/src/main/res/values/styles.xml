@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
+=======
+    <style name="DefaultText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/icons_and_common_text</item>
+    </style>
+>>>>>>> master
 
     <style name="BoldTitle">
         <item name="android:textSize">18sp</item>
@@ -8,7 +17,7 @@
 
     <style name="MainText">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/purple</item>
+        <item name="android:textColor">@color/bright_purple_detail_screen</item>
     </style>
 
     <style name="RoundedSearchView" parent="Widget.AppCompat.SearchView">
@@ -103,6 +112,18 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RoundedDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_rounded_dialog</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/AlertDialogButtonStyle</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/AlertDialogButtonStyle</item>
+        <item name="colorControlActivated">@color/button_fav_unactivated</item>
+        <item name="colorControlNormal">@color/button_fav_activated</item>
+    </style>
+
+    <style name="AlertDialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/bright_purple_detail_screen</item>
     </style>
 
 </resources>
