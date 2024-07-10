@@ -28,9 +28,8 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-class MapViewModel(private val context: Context): ViewModel() {
+class MapViewModel(private val database: PlaceDatabase): ViewModel() {
 
-    private val database = PlaceDatabase.getDatabase(context)
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
     private var filteredList: List<Place>? = null
 
@@ -43,15 +42,6 @@ class MapViewModel(private val context: Context): ViewModel() {
 
     private val _stateResult = MutableStateFlow<StateResult>(StateResult.Loading)
     val stateResult: StateFlow<StateResult> = _stateResult.asStateFlow()
-
-//    private val placesList = listOf(
-//        Place(id = 0, name = "Скай парк", price = 700, latitude = 55.7997229, longitude = 49.1478210, categoryId = 0),
-//        Place(id = 1, name = "Pro coffe.shop", price = 1500, latitude = 55.8010952, longitude = 49.1411095, categoryId = 1),
-//        Place(id = 2, name = "Карл Фукс", price = 0, latitude = 55.7997517, longitude = 49.1299838, categoryId = 2),
-//        Place(id = 3, name = "Исфара", price = 500, latitude = 55.7971999, longitude = 49.1284360, categoryId = 0),
-//        Place(id = 4, name = "Cho", price = 550, latitude = 55.7962009, longitude = 49.1295261, categoryId = 1),
-//        Place(id = 5, name = "Дом-музей В.П.Аксенова", price = 1000, latitude = 55.7954638, longitude = 49.1351423, categoryId = 2),
-//    )
 
     fun setCategoryId(value: Int) {
         categoryId = value

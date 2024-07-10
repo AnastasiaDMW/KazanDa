@@ -73,7 +73,7 @@
                         android:id="@+id/ivPlaceImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitStart" />
+                        android:scaleType="centerCrop" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -106,6 +106,7 @@
                 <TextView
                     android:id="@+id/tvTime"
                     style="@style/AccentInfo"
+                    android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
