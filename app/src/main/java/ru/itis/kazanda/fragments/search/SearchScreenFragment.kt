@@ -25,24 +25,15 @@ class SearchScreenFragment : Fragment(R.layout.fragment_search_screen) {
 
         binding?.run {
             sCategory.adapter = startMapViewModel?.iconTexts?.let { SpinnerAdapter(root.context, it) }
+            val price = if (etPrice.text.isNullOrBlank()) 0 else etPrice.text.toString().toInt()
             btnSearch.setOnClickListener {
-                if (etPrice.text.isNullOrBlank()) {
-                    findNavController().navigate(
-                        resId = R.id.action_searchScreenFragment_to_mapScreenFragment,
-                        args = MapScreenFragment.bundle(
-                            categoryType = startMapViewModel!!.iconTexts[sCategory.selectedItemPosition].title,
-                            price = 0
-                        )
+                findNavController().navigate(
+                    resId = R.id.action_searchScreenFragment_to_mapScreenFragment,
+                    args = MapScreenFragment.bundle(
+                        categoryType = startMapViewModel!!.iconTexts[sCategory.selectedItemPosition].title,
+                        price = price
                     )
-                } else {
-                    findNavController().navigate(
-                        resId = R.id.action_searchScreenFragment_to_mapScreenFragment,
-                        args = MapScreenFragment.bundle(
-                            categoryType = startMapViewModel!!.iconTexts[sCategory.selectedItemPosition].title,
-                            price = etPrice.text.toString().toInt()
-                        )
-                    )
-                }
+                )
             }
         }
     }

@@ -45,9 +45,7 @@ class CustomProgressDialog(context: Context) {
                 pbLoading.indeterminateDrawable,
                 ResourcesCompat.getColor(context.resources, com.google.android.material.R.color.design_default_color_primary, null)
             )
-
             pbTitle.setTextColor(Color.WHITE)
-
             dialog = CustomDialog(context)
             dialog.setContentView(view)
         }
@@ -69,5 +67,4 @@ class CustomProgressDialog(context: Context) {
             }
         }
     }
-
 }
