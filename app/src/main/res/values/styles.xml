@@ -114,10 +114,15 @@
         <item name="android:buttonBarNegativeButtonStyle">@style/AlertDialogButtonStyle</item>
         <item name="colorControlActivated">@color/button_fav_unactivated</item>
         <item name="colorControlNormal">@color/button_fav_activated</item>
+        <item name="android:textColor">@color/icons_and_common_text</item>
+        <item name="android:textColorAlertDialogListItem">@color/main_button_text</item>
+        <item name="android:fontFamily">@font/font_montserrat_regular</item>
+
     </style>
 
     <style name="AlertDialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/bright_purple_detail_screen</item>
+        <item name="android:fontFamily">@font/font_montserrat_regular</item>
     </style>
 
 </resources>
