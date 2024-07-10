@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.yandex.mapkit.MapKitFactory
@@ -44,9 +45,11 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
         binding = FragmentMapScreenBinding.bind(view)
 
         progressDialog = CustomProgressDialog(requireContext())
-        mapViewModel = MapViewModel()
+        mapViewModel = binding?.root?.context?.let { MapViewModel(it) }
         val price = arguments?.getInt(PRICE) ?: 0
         val categoryType = arguments?.getString(CATEGORY_TYPE) ?: "ERROR"
+        mapViewModel?.getAllPlaces()
+        Log.d("DATA", mapViewModel?.placeList.toString())
 
         Constant.categoryList.forEachIndexed { index, category ->
             if (category.title == categoryType){
@@ -73,10 +76,10 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                         is StateResult.Info -> Snackbar.make(binding?.root!!, result.message, Snackbar.LENGTH_LONG).show()
                         is StateResult.Error -> Snackbar.make(binding?.root!!, result.message, Snackbar.LENGTH_LONG).show()
                         StateResult.Loading -> {
-                            delay(2500L)
+                            delay(2000L)
                             progressDialog?.stop()
                             BottomSheetBehavior.from(sheet).apply {
-                                peekHeight = 60
+                                peekHeight = 50
                                 this.state = BottomSheetBehavior.STATE_COLLAPSED
                                 isHideable = false
                                 isDraggable = false
@@ -135,10 +138,21 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                     BottomSheetBehavior.from(sheet).apply {
                         this.state = BottomSheetBehavior.STATE_COLLAPSED
                         this.state = BottomSheetBehavior.STATE_EXPANDED
+                        peekHeight = 50
                         isDraggable = true
                     }
                     clBottomSheetContainer.visibility = ConstraintLayout.VISIBLE
-                    tvTitile.text = place.name
+                    tvTitile.text = place.title
+                    tvTime.text = place.hours
+                    if (place.cost == 0){
+                        tvPrice.text = "Бесплатно"
+                    } else {
+                        tvPrice.text = "${place.cost} руб"
+                    }
+                    val firstImg = place.imageUrls.split("\\n")[0]
+                    Glide.with(root.context)
+                        .load(firstImg)
+                        .into(ivPlaceImage)
                     btnDescription.setOnClickListener {
                         val bundle = Bundle().apply {
                             putInt("placeId", place.id)
@@ -147,9 +161,6 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                             resId = R.id.action_mapScreenFragment_to_detailScreenFragment,
                             bundle
                         )
-                    }
-                    btnRoute.setOnClickListener {
-                        //Мб сегодня сделаю, если не получится, уберу
                     }
                 }
                 true
