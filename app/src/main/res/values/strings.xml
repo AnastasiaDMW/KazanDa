@@ -3,10 +3,13 @@
     <string name="main_screen_title">Главная</string>
     <string name="profile_screen_title">Профиль</string>
     <string name="map_screen_title">Карта</string>
+    <string name="search_screen_title">Поиск мест в Казани</string>
     <string name="favorite_title">Избранное</string>
     <string name="confirm_button_text">Подтвердить</string>
+    <string name="search_button_text">Найти места рядом</string>
     <string name="hint_name">Имя</string>
     <string name="hint_email">E-mail</string>
+    <string name="hint_cost">Стоимость</string>
     <string name="description">Описание</string>
     <string name="place_adress">Адрес</string>
     <string name="back">Назад</string>
@@ -15,4 +18,11 @@
     <string name="filter">Фильтрация</string>
     <string name="default_email">Неизвестно</string>
     <string name="default_name">Вася Пупкин</string>
+    <string name="spinner_text">Еда</string>
+    <string name="more_info_button">Подробнее</string>
+    <string name="find_the_way_button">Построить маршрут</string>
+    <string name="place_name">Название</string>
+    <string name="default_price">free</string>
+    <string name="default_time">00:00-00:00</string>
+    <string name="default_address">Address</string>
 </resources>

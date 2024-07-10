@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragments.profile.EditScreenFragment">
 
     <ImageView
@@ -26,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/sub_color_2"
+        app:tint="@color/input_background"
         android:src="@drawable/ic_person_24" />
 
     <ImageView
@@ -37,11 +38,12 @@
         android:src="@drawable/ic_add_photo_24"
         app:layout_constraintStart_toEndOf="@+id/ivIcon"
         app:layout_constraintTop_toTopOf="@+id/ivIcon"
-        app:tint="@color/sub_color_2" />
+        app:tint="@color/main_button_text" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        style="@style/CustomTextInputLayout"
+        android:theme="@style/ThemeOverlay.MyApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -61,7 +63,8 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
+        style="@style/CustomTextInputLayout"
+        android:theme="@style/ThemeOverlay.MyApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -84,9 +87,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="192dp"
         android:enabled="true"
         android:text="@string/confirm_button_text"
         android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/font_montserrat_regular"
+        android:background="@drawable/button_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
