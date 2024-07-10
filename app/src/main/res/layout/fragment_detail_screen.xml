@@ -39,15 +39,32 @@
             android:textSize="24sp"
             tools:text="@string/place_name" />
 
-        <TextView
-            android:id="@+id/placePayment"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:textSize="18sp"
-            android:textColor="@color/no_accent_elements"
-            android:fontFamily="@font/font_montserrat_regular"
-            tools:text="@string/default_price" />
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/placeCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/icons_and_common_text"
+                android:fontFamily="@font/font_montserrat_regular"
+                tools:text="Категория" />
+
+            <TextView
+                android:id="@+id/placePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:textSize="18sp"
+                android:textColor="@color/no_accent_elements"
+                android:fontFamily="@font/font_montserrat_regular"
+                tools:text="Цена" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
