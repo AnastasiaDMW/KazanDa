@@ -6,6 +6,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import ru.itis.kazanda.R
+import ru.itis.kazanda.data.Favorite
 import ru.itis.kazanda.databinding.ItemFavoritePlaceBinding
 import ru.itis.kazanda.fragments.main.PaymentType
 import ru.itis.kazanda.fragments.main.Place
@@ -13,17 +14,17 @@ import ru.itis.kazanda.fragments.main.Place
 class FavoritePlaceHolder(
     private val binding: ItemFavoritePlaceBinding,
     private val glide: RequestManager,
-    private val onClick: (Place) -> Unit,
+    private val profileViewModel: ProfileViewModel,
+    private val onClick: (Favorite) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val requestOptions = RequestOptions
         .diskCacheStrategyOf(DiskCacheStrategy.ALL)
 
-    fun onBind(place: Place) {
+    fun onBind(place: Favorite) {
         binding.apply {
-            placeName.text = place.name
-            placePayment.text = PaymentType.entries[place.payment].toString()
-
+            placeName.text = place.title
+            placePayment.text = PaymentType.entries[place.cost].toString()
             //получаем картинку из сети
             glide
                 .load(place.imageUrls.split("\n")[0])
@@ -31,15 +32,13 @@ class FavoritePlaceHolder(
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .apply(requestOptions)
                 .into(placeImage)
-            val isFavorite = readFavoriteState(place.id)
-            setFavoriteIcon(isFavorite)
+            //val isFavorite = readFavoriteState(place.id)
+            setFavoriteIcon(true)
 
             favoriteIcon.setOnClickListener {
-                val newFavoriteState = !place.isFavorite
-                place.isFavorite = newFavoriteState
-                setFavoriteIcon(newFavoriteState)
-                saveFavoriteState(place.id, newFavoriteState)
-                true
+                place.let {
+                    profileViewModel.delete(it)
+                }
             }
             root.setOnClickListener {
                 onClick.invoke(place)
@@ -53,7 +52,7 @@ class FavoritePlaceHolder(
         )
     }
 
-    private fun saveFavoriteState(placeId: Int, isFavorite: Boolean) {
+    /*private fun saveFavoriteState(placeId: Int, isFavorite: Boolean) {
         val sharedPreferences = itemView.context.getSharedPreferences("Favorites", Context.MODE_PRIVATE)
         with(sharedPreferences.edit()) {
             putBoolean(placeId.toString(), isFavorite)
@@ -64,5 +63,15 @@ class FavoritePlaceHolder(
     private fun readFavoriteState(placeId: Int): Boolean {
         val sharedPreferences = itemView.context.getSharedPreferences("Favorites", Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean(placeId.toString(), false)
-    }
+    }*/
 }
+
+/*
+favoriteIcon.setOnClickListener {
+
+    val newFavoriteState = !place.isFavorite
+    place.isFavorite = newFavoriteState
+    setFavoriteIcon(newFavoriteState)
+    saveFavoriteState(place.id, newFavoriteState)
+    true
+}*/
