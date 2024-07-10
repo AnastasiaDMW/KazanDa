@@ -31,18 +31,20 @@
 
     <TextView
         android:id="@+id/placeName"
+        style="@style/PlaceTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="4dp"
         android:textSize="16sp"
-        tools:text="Name" />
+        tools:text="@string/place_name" />
 
     <TextView
         android:id="@+id/placePayment"
+        style="@style/PlacePrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="14sp"
-        tools:text="payment" />
+        tools:text="@string/hint_cost" />
 </LinearLayout>

@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
-=======
-    <style name="DefaultText">
-        <item name="android:textSize">20sp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/icons_and_common_text</item>
-    </style>
->>>>>>> master
 
     <style name="BoldTitle">
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/font_montserrat_regular</item>
+        <item name="android:textColor">@color/icons_and_common_text</item>
     </style>
 
     <style name="MainText">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/bright_purple_detail_screen</item>
+        <item name="android:fontFamily">@font/font_montserrat_regular</item>
     </style>
 
     <style name="RoundedSearchView" parent="Widget.AppCompat.SearchView">
