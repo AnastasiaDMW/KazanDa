@@ -42,6 +42,10 @@ class PlaceViewHolder(
             }
         }
     }
+    companion object {
+        private const val FAVORITES_PREFS = "Favorites"
+    }
+
     private fun setFavoriteIcon(isFavorite: Boolean) {
         binding.favoriteIcon.setImageResource(
             if (isFavorite) R.drawable.ic_favorite_heart_filled
@@ -50,7 +54,7 @@ class PlaceViewHolder(
     }
 
     private fun saveFavoriteState(placeId: Int, isFavorite: Boolean) {
-        val sharedPreferences = itemView.context.getSharedPreferences("Favorites", Context.MODE_PRIVATE)
+        val sharedPreferences = itemView.context.getSharedPreferences(FAVORITES_PREFS, Context.MODE_PRIVATE)
         with(sharedPreferences.edit()) {
             putBoolean(placeId.toString(), isFavorite)
             apply()
@@ -58,7 +62,8 @@ class PlaceViewHolder(
     }
 
     private fun readFavoriteState(placeId: Int): Boolean {
-        val sharedPreferences = itemView.context.getSharedPreferences("Favorites", Context.MODE_PRIVATE)
+        val sharedPreferences = itemView.context.getSharedPreferences(FAVORITES_PREFS, Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean(placeId.toString(), false)
     }
+
 }
