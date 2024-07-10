@@ -2,18 +2,27 @@ package ru.itis.kazanda.fragments.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.RequestManager
 import ru.itis.kazanda.databinding.ItemPlaceBinding
+import ru.itis.kazanda.data.Place
+
 
 class PlaceAdapter(
     private val glide: RequestManager,
+    private val viewModel: MainViewModel,
+    private val lifecycleOwner: LifecycleOwner,
     private val onClick: (Place) -> Unit,
 ) : ListAdapter<Place, PlaceViewHolder>(diffCallback) {
-
+    private var originalList: List<Place> = listOf()
     init {
         setHasStableIds(true)
+        viewModel.places.observe(lifecycleOwner) { places ->
+            originalList = places
+            submitList(places)
+        }
     }
 
     companion object {
@@ -30,11 +39,14 @@ class PlaceAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val binding = ItemPlaceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PlaceViewHolder(binding, glide, onClick)
+        return PlaceViewHolder(binding, glide, onClick, viewModel::toggleFavorite,lifecycleOwner)
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        holder.onBind(getItem(position))
+        val place = getItem(position)
+        viewModel.isPlaceFavorite(place.id).observe(lifecycleOwner) { isFavorite ->
+            holder.onBind(place, isFavorite)
+        }
     }
 
     override fun getItemId(position: Int): Long {
@@ -42,30 +54,14 @@ class PlaceAdapter(
     }
 
     fun filterPlaces(query: String) {
-        val fullList = PlaceRepository.places
-        val filteredPlaces = if (query.isEmpty()) {
-            fullList
-        } else {
-            fullList.filter {
-                it.name.contains(query, ignoreCase = true)
-            }
+        viewModel.getFilteredPlaces(query).observe(lifecycleOwner) { places ->
+            submitList(places)
         }
-        submitList(filteredPlaces)
     }
-    fun filterByPayment(checkedItems: BooleanArray) {
-        val paymentRanges = listOf(0, 1, 2, 3)
-        val filteredList =
-            if (checkedItems.any { it }) {
-                PlaceRepository.places.filter { place ->
-                    checkedItems.indices.any { index ->
-                        val minPrice = if (index == 0) 0 else paymentRanges[index - 1] + 1
-                        val maxPrice = paymentRanges[index]
-                        place.payment in minPrice..maxPrice && checkedItems[index]
-                    }
-                }
-            } else {
-                PlaceRepository.places
-            }
-        submitList(filteredList)
+
+    fun filterByPriceRange(minCost: Int, maxCost: Int) {
+        viewModel.getFilteredByPayment(minCost, maxCost).observe(lifecycleOwner) { places ->
+            submitList(places)
+        }
     }
 }
