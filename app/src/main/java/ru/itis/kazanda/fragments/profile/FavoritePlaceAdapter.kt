@@ -2,6 +2,7 @@ package ru.itis.kazanda.fragments.profile
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import ru.itis.kazanda.data.Favorite
@@ -25,7 +26,7 @@ class FavoritePlaceAdapter(
             false
         ),
         glide = glide,
-        profileViewModel = profileViewModel,
+        removePlaceFromFavorites = profileViewModel::removePlaceFromFavorites,
         onClick = onClick,
     )
 
