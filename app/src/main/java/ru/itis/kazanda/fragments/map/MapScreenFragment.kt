@@ -30,7 +30,6 @@ import ru.itis.kazanda.Constant.PRICE
 import ru.itis.kazanda.R
 import ru.itis.kazanda.data.Place
 import ru.itis.kazanda.data.StateResult
-import ru.itis.kazanda.database.PlaceDatabase
 import ru.itis.kazanda.databinding.FragmentMapScreenBinding
 
 class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
@@ -39,16 +38,14 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
     private var mapViewModel: MapViewModel? = null
     private var progressDialog: CustomProgressDialog? = null
     private var isExistCategory: Boolean = false
-    private var database: PlaceDatabase? = null
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMapScreenBinding.bind(view)
-        database = binding?.root?.context?.let { PlaceDatabase.getDatabase(it) }
 
         progressDialog = CustomProgressDialog(requireContext())
-        mapViewModel = database?.let { MapViewModel(it) }
+        mapViewModel = binding?.root?.context?.let { MapViewModel(it) }
         val price = arguments?.getInt(PRICE) ?: 0
         val categoryType = arguments?.getString(CATEGORY_TYPE) ?: "ERROR"
         mapViewModel?.getAllPlaces()

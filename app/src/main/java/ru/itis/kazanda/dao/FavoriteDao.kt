@@ -20,4 +20,8 @@ interface FavoriteDao {
     @Delete
     suspend fun delete(favorite: Favorite)
 
+    @Query("SELECT * FROM favorite WHERE id = :placeId LIMIT 1")
+    fun isFavorite(placeId: Int): Flow<Favorite?>
+    @Query("SELECT * FROM favorite WHERE id = :placeId LIMIT 1")
+    suspend fun isFavoriteSynchronously(placeId: Int): Favorite?
 }
