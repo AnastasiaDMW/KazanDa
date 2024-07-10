@@ -27,7 +27,7 @@ class FavoritePlaceHolder(
             placePayment.text = place.cost.toString()
             //получаем картинку из сети
             glide
-                .load(place.imageUrls.split("\n")[0])
+                .load(place.imageUrls.split("\\n")[0])
                 .error(R.drawable.baseline_photo_camera_back_24)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .apply(requestOptions)

@@ -16,7 +16,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/placeImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="112dp"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/RoundedCorners"
             tools:src="@drawable/ic_launcher_foreground"/>
