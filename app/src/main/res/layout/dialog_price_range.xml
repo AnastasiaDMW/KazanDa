@@ -30,5 +30,10 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="Нет лимита"/>
-
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_spinner"/>
 </LinearLayout>

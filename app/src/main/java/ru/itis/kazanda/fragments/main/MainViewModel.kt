@@ -23,7 +23,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getFilteredByPayment(minCost: Int, maxCost: Int): LiveData<List<Place>> {
         return db.placeDao().getFilteredByPayment(minCost, maxCost).asLiveData()
     }
+    fun getFilteredByCategory(categoryId: Int): LiveData<List<Place>> {
+        return if (categoryId == ALL_CATEGORIES_ID) {
+            db.placeDao().getAllPlaces().asLiveData()
+        } else {
+            db.placeDao().getFilteredByCategory(categoryId).asLiveData()
+        }
+    }
 
+    companion object {
+        const val ALL_CATEGORIES_ID = -1
+    }
     fun isPlaceFavorite(placeId: Int): LiveData<Boolean> {
         return db.favoriteDao().isFavorite(placeId).asLiveData().map { it != null }
     }

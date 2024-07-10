@@ -35,6 +35,7 @@ class PlaceAdapter(
                 return oldItem == newItem
             }
         }
+        const val ALL_CATEGORIES_ID = -1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
@@ -55,13 +56,22 @@ class PlaceAdapter(
 
     fun filterPlaces(query: String) {
         viewModel.getFilteredPlaces(query).observe(lifecycleOwner) { places ->
+            originalList = places
             submitList(places)
         }
     }
 
     fun filterByPriceRange(minCost: Int, maxCost: Int) {
         viewModel.getFilteredByPayment(minCost, maxCost).observe(lifecycleOwner) { places ->
+            originalList = places
             submitList(places)
         }
     }
+    fun filterByCategory(categoryId: Int) {
+        viewModel.getFilteredByCategory(categoryId).observe(lifecycleOwner) { places ->
+            originalList = places
+            submitList(places)
+        }
+    }
+
 }
