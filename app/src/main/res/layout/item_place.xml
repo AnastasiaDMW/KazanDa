@@ -19,14 +19,13 @@
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/RoundedCorners"
             tools:src="@drawable/ic_launcher_foreground"/>
-        <CheckBox
-            android:id="@+id/favoriteCheckbox"
-            android:theme="@style/MyCheckBox"
+        <ImageView
+            android:id="@+id/favoriteIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|top"
-            android:button="@drawable/checkbox_selector_favorite"
-            android:padding="16dp"/>
+            android:padding="8dp"
+            android:src="@drawable/ic_favorite_heart_empty" />
     </FrameLayout>
 
     <TextView
@@ -36,7 +35,7 @@
         android:gravity="center"
         android:paddingTop="4dp"
         android:textSize="16sp"
-        tools:text="Name" />
+        tools:text="Название" />
 
     <TextView
         android:id="@+id/placePayment"
@@ -44,5 +43,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="14sp"
-        tools:text="payment" />
+        tools:text="Стоимость"
+        android:textColor="@color/icons_and_common_text"/>
 </LinearLayout>

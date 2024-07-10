@@ -1,8 +1,11 @@
 package ru.itis.kazanda.fragments.main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,11 +17,15 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
     private var binding: FragmentMainScreenBinding? = null
     private lateinit var adapter: PlaceAdapter
     private var places: List<Place> = PlaceRepository.places
+    private val selectedFilters = booleanArrayOf(false, false, false, false)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainScreenBinding.bind(view)
         initAdapter()
         setupSearchView()
+        binding?.filterButton?.setOnClickListener {
+            showFilterDialog()
+        }
     }
 
     override fun onDestroyView() {
@@ -57,5 +64,21 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
                 return true
             }
         })
+    }
+    private fun showFilterDialog() {
+        val paymentOptions = arrayOf("Бесплатно", "$", "$$", "$$$")
+        val builder = AlertDialog.Builder(requireContext(), R.style.RoundedDialog)
+        builder.setTitle("Выберите диапазон оплаты")
+            .setMultiChoiceItems(paymentOptions, selectedFilters) { _, which, isChecked ->
+                selectedFilters[which] = isChecked
+            }
+            .setPositiveButton("Применить") { dialog, _ ->
+                adapter.filterByPayment(selectedFilters)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Отмена") { dialog, _ ->
+                dialog.dismiss()
+            }
+        builder.create().show()
     }
 }

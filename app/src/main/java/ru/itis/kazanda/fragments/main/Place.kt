@@ -8,4 +8,5 @@ data class Place(
     val hours: String,
     val description: String,
     val imageUrls: String,
+    var isFavorite: Boolean
 )
