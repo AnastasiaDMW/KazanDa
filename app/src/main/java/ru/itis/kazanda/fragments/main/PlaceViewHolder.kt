@@ -23,7 +23,7 @@ class PlaceViewHolder(
     fun onBind(place: Place, isFavorite: Boolean) {
         binding.run {
             placeName.text = place.title
-            placePayment.text = place.cost.toString()
+            placePayment.text = if (place.cost > 0) "${place.cost} ₽" else "Бесплатно"
             glide
                 .load(place.imageUrls.split("\\n")[0])
                 .error(R.drawable.baseline_photo_camera_back_24)
