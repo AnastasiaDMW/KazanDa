@@ -94,20 +94,16 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
             .setTitle("Фильтр")
             .setPositiveButton("Применить") { dialog, _ ->
                 val selectedCategoryIndex = categorySpinner.selectedItemPosition
+                val selectedCategoryId = if (selectedCategoryIndex == 0) {
+                    MainViewModel.ALL_CATEGORIES_ID
+                } else {
+                    Constant.categoryList[selectedCategoryIndex - 1].id
+                }
+                adapter.filterByCategory(selectedCategoryId)
                 val minCost = minPriceEditText.text.toString().toIntOrNull() ?: 0
                 val maxCost = maxPriceEditText.text.toString().toIntOrNull() ?: Int.MAX_VALUE
+                adapter.filterByPriceRange(minCost, maxCost)
 
-                if (minCost <= maxCost) {
-                    if (selectedCategoryIndex == 0) {
-                        adapter.filterByCategory(MainViewModel.ALL_CATEGORIES_ID)
-                    } else {
-                        val selectedCategoryId = Constant.categoryList[selectedCategoryIndex - 1].id
-                        adapter.filterByCategory(selectedCategoryId)
-                    }
-                    adapter.filterByPriceRange(minCost, maxCost)
-                } else {
-                    Toast.makeText(requireContext(), "Минимальная цена должна быть меньше максимальной.", Toast.LENGTH_LONG).show()
-                }
                 dialog.dismiss()
             }
             .setNegativeButton("Отмена") { dialog, _ ->
