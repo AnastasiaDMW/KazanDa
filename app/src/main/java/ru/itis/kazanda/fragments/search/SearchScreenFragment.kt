@@ -1,6 +1,7 @@
 package ru.itis.kazanda.fragments.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -25,8 +26,8 @@ class SearchScreenFragment : Fragment(R.layout.fragment_search_screen) {
 
         binding?.run {
             sCategory.adapter = startMapViewModel?.iconTexts?.let { SpinnerAdapter(root.context, it) }
-            val price = if (etPrice.text.isNullOrBlank()) 0 else etPrice.text.toString().toInt()
             btnSearch.setOnClickListener {
+                val price = if (etPrice.text.isNullOrBlank()) 0 else etPrice.text.toString().toInt()
                 findNavController().navigate(
                     resId = R.id.action_searchScreenFragment_to_mapScreenFragment,
                     args = MapScreenFragment.bundle(

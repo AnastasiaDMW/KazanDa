@@ -19,8 +19,10 @@ import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.map.MapObject
+import com.yandex.mapkit.map.MapObjectCollection
 import com.yandex.mapkit.map.MapObjectTapListener
 import com.yandex.mapkit.map.PlacemarkMapObject
+import com.yandex.mapkit.map.TextStyle
 import com.yandex.runtime.image.ImageProvider
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -38,6 +40,8 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
     private var mapViewModel: MapViewModel? = null
     private var progressDialog: CustomProgressDialog? = null
     private var isExistCategory: Boolean = false
+    private var pinsCollection:MapObjectCollection? = null
+    var placemarkTapListener: MapObjectTapListener? = null
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,12 +51,16 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
         progressDialog = CustomProgressDialog(requireContext())
         mapViewModel = binding?.root?.context?.let { MapViewModel(it) }
         val price = arguments?.getInt(PRICE) ?: 0
+        mapViewModel?.setPrice(price)
         val categoryType = arguments?.getString(CATEGORY_TYPE) ?: "ERROR"
-        mapViewModel?.getAllPlaces()
-        Log.d("DATA", mapViewModel?.placeList.toString())
+        mapViewModel?.categoryType = categoryType
+        if (mapViewModel?.placeList?.value.isNullOrEmpty()) {
+            mapViewModel?.getAllPlaces()
+        }
 
+        Log.d("DATA", mapViewModel?.placeList?.value.toString())
         Constant.categoryList.forEachIndexed { index, category ->
-            if (category.title == categoryType){
+            if (category.title == mapViewModel?.categoryType){
                 mapViewModel?.setCategoryId(index)
                 isExistCategory = true
             }
@@ -76,7 +84,7 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                         is StateResult.Info -> Snackbar.make(binding?.root!!, result.message, Snackbar.LENGTH_LONG).show()
                         is StateResult.Error -> Snackbar.make(binding?.root!!, result.message, Snackbar.LENGTH_LONG).show()
                         StateResult.Loading -> {
-                            delay(2000L)
+                            delay(1500L)
                             progressDialog?.stop()
                             BottomSheetBehavior.from(sheet).apply {
                                 peekHeight = 50
@@ -94,8 +102,7 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                                 if (filteredList != null) {
                                     displayPlacemarksOnMap(filteredList)
                                 } else {
-                                    Snackbar.make(root, "Рядом с вами ничего нет(", Snackbar.LENGTH_SHORT).show()
-                                    Log.d("DisplayPlacemarksOnMap", "filteredList is null")
+                                    mapViewModel?.getData(root.context,0.5)
                                 }
                             }
                         }
@@ -103,7 +110,7 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                     }
                 }
             }
-            mapViewModel?.getData(root.context,0.5, price)
+            mapViewModel?.getData(root.context,0.5)
         }
     }
 
@@ -111,21 +118,29 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
 
         binding?.run {
 
-            val pinsCollection = mvPlace.map.mapObjects.addCollection()
-            val points = filteredList.map { Point(it.latitude, it.longitude) }
+            pinsCollection = mvPlace.map.mapObjects.addCollection()
+            val points = filteredList.map { (it.title to Point(it.latitude, it.longitude)) }
 
             val imageProvider = ImageProvider.fromResource(root.context, R.drawable.pin)
 
             mvPlace.map.addCameraListener { p0, p1, p2, p3 ->
                 points.forEach { point ->
-                    pinsCollection.addPlacemark().apply {
-                        geometry = point
+                    pinsCollection?.addPlacemark()?.apply {
+                        geometry = point.second
                         setIcon(imageProvider)
+                        setText(
+                            point.first,
+                            TextStyle().apply {
+                                size = 10f
+                                placement = TextStyle.Placement.RIGHT
+                                offset = 5f
+                            },
+                        )
                     }
                 }
             }
 
-            var placemarkTapListener = MapObjectTapListener { _, point ->
+            placemarkTapListener = MapObjectTapListener { _, point ->
                 val place: Place? = filteredList.find {
                     mapViewModel?.checkLocationMatch(
                         it.latitude.toString(),
@@ -140,6 +155,7 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                         this.state = BottomSheetBehavior.STATE_EXPANDED
                         peekHeight = 50
                         isDraggable = true
+
                     }
                     clBottomSheetContainer.visibility = ConstraintLayout.VISIBLE
                     tvTitile.text = place.title
@@ -165,7 +181,7 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                 }
                 true
             }
-            pinsCollection.addTapListener(placemarkTapListener)
+            pinsCollection?.addTapListener(placemarkTapListener!!)
         }
     }
 
@@ -180,6 +196,10 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
         super.onDestroyView()
         binding?.mvPlace?.map?.mapObjects?.clear()
         binding = null
+        mapViewModel = null
+        progressDialog = null
+        mapViewModel?.placeList?.removeObservers(viewLifecycleOwner)
+        binding?.mvPlace?.setOnClickListener(null)
     }
 
     override fun onStart() {

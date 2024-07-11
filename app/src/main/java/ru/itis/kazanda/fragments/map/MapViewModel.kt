@@ -37,6 +37,8 @@ class MapViewModel(private val context: Context): ViewModel() {
     private var userLatitude: Double? = null
     private var userLongitude: Double? = null
     private var categoryId: Int? = null
+    private var price: Int = 0
+    var categoryType: String? = null
 
     private val _placeList = MutableLiveData<List<Place>>()
     val placeList: LiveData<List<Place>> = _placeList
@@ -44,17 +46,13 @@ class MapViewModel(private val context: Context): ViewModel() {
     private val _stateResult = MutableStateFlow<StateResult>(StateResult.Loading)
     val stateResult: StateFlow<StateResult> = _stateResult.asStateFlow()
 
-//    private val placesList = listOf(
-//        Place(id = 0, name = "Скай парк", price = 700, latitude = 55.7997229, longitude = 49.1478210, categoryId = 0),
-//        Place(id = 1, name = "Pro coffe.shop", price = 1500, latitude = 55.8010952, longitude = 49.1411095, categoryId = 1),
-//        Place(id = 2, name = "Карл Фукс", price = 0, latitude = 55.7997517, longitude = 49.1299838, categoryId = 2),
-//        Place(id = 3, name = "Исфара", price = 500, latitude = 55.7971999, longitude = 49.1284360, categoryId = 0),
-//        Place(id = 4, name = "Cho", price = 550, latitude = 55.7962009, longitude = 49.1295261, categoryId = 1),
-//        Place(id = 5, name = "Дом-музей В.П.Аксенова", price = 1000, latitude = 55.7954638, longitude = 49.1351423, categoryId = 2),
-//    )
-
     fun setCategoryId(value: Int) {
         categoryId = value
+        Log.d("DATA", "CategoryId: $categoryId")
+    }
+
+    fun setPrice(value: Int) {
+        price = value
     }
 
     fun getUserLocation(): Pair<Double?, Double?> {
@@ -73,7 +71,7 @@ class MapViewModel(private val context: Context): ViewModel() {
         }
     }
 
-    fun getData(context: Context, radius: Double, price: Int) {
+    fun getData(context: Context, radius: Double) {
         viewModelScope.launch {
             val (userLat, userLng) = getLocation(context)
             _stateResult.value = findPlacesNearby(userLat, userLng, radius, price)
@@ -115,22 +113,31 @@ class MapViewModel(private val context: Context): ViewModel() {
     private fun findPlacesNearby(
         userLat: Double,
         userLng: Double,
-        radius: Double = 2.0,
+        radius: Double = 1.0,
         price: Int
     ): StateResult {
         return try {
-            if (_placeList.value.isNullOrEmpty()) {
-                StateResult.Error("Список пуст")
+            if (!_placeList.value.isNullOrEmpty()) {
+                StateResult.Error("")
             } else {
                 val newList = _placeList.value?.filter { place ->
                     val (lat, lng) = place.latitude to place.longitude
                     val distance = calculateDistance(userLat to userLng, lat to lng, radius)
+                    Log.d("DATA", "Стоимость: $price - ${place.cost}")
                     distance <= radius && place.cost <= price
                 }?.filter { place ->
-                    if (categoryId != Constant.categoryList.size) place.categoryId == categoryId
-                    else true
+                    if (categoryId != Constant.categoryList.size) {
+                        Log.d("DATA", "${place.title} - зашел в if")
+                        place.categoryId == categoryId
+                    }
+                    else {
+                        Log.d("DATA", "${place.title} - зашел в else")
+                        true
+                    }
                 }
                 filteredList = newList
+                Log.d("DATA", _placeList.value.toString())
+                Log.d("DATA", "filteredList: $filteredList")
                 StateResult.Loading
             }
         } catch (e: NullPointerException) {
@@ -163,8 +170,10 @@ class MapViewModel(private val context: Context): ViewModel() {
 
             val timeDist = sin(dLat/2) * sin(dLat/2) + cos(Math.toRadians(userLat)) * cos(Math.toRadians(lat)) * sin(dLng/2) * sin(dLng/2)
             val distance = 2* atan2(sqrt(timeDist), sqrt(1-timeDist))
+            Log.d("DATA", "${earthRadius * distance} - радиус")
             earthRadius * distance
         } else {
+            Log.d("DATA", "${userRadius + 1} - радиус")
             userRadius + 1
         }
     }
