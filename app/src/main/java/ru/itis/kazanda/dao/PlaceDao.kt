@@ -15,8 +15,8 @@ interface PlaceDao {
     fun getPlaceById(id: Int): Flow<Place>
     @Query("SELECT * FROM place WHERE title LIKE :query")
     fun getFilteredPlaces(query: String): Flow<List<Place>>
-
     @Query("SELECT * FROM place WHERE cost BETWEEN :minCost AND :maxCost")
     fun getFilteredByPayment(minCost: Int, maxCost: Int): Flow<List<Place>>
-   
+    @Query("SELECT * FROM place WHERE categoryId = :categoryId")
+    fun getFilteredByCategory(categoryId: Int): Flow<List<Place>>
 }
