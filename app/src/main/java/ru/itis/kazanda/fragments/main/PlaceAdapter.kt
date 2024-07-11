@@ -17,6 +17,8 @@ class PlaceAdapter(
     private val onClick: (Place) -> Unit,
 ) : ListAdapter<Place, PlaceViewHolder>(diffCallback) {
     private var originalList: List<Place> = listOf()
+    private var filteredPlacesByCategory: List<Place> = listOf()
+    private var filteredPlacesByPrice: List<Place> = listOf()
     init {
         setHasStableIds(true)
         viewModel.places.observe(lifecycleOwner) { places ->
@@ -61,17 +63,23 @@ class PlaceAdapter(
         }
     }
 
-    fun filterByPriceRange(minCost: Int, maxCost: Int) {
-        viewModel.getFilteredByPayment(minCost, maxCost).observe(lifecycleOwner) { places ->
-            originalList = places
-            submitList(places)
-        }
-    }
     fun filterByCategory(categoryId: Int) {
         viewModel.getFilteredByCategory(categoryId).observe(lifecycleOwner) { places ->
-            originalList = places
-            submitList(places)
+            filteredPlacesByCategory = places
+            combineFilters()
         }
+    }
+
+    fun filterByPriceRange(minCost: Int, maxCost: Int) {
+        viewModel.getFilteredByPayment(minCost, maxCost).observe(lifecycleOwner) { places ->
+            filteredPlacesByPrice = places
+            combineFilters()
+        }
+    }
+
+    private fun combineFilters() {
+        val combinedList = filteredPlacesByCategory.intersect(filteredPlacesByPrice).toList()
+        submitList(combinedList)
     }
 
 }

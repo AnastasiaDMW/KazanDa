@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import ru.itis.kazanda.data.Place
+import ru.itis.kazanda.fragments.main.MainViewModel
 
 @Dao
 interface PlaceDao {
@@ -17,6 +18,6 @@ interface PlaceDao {
     fun getFilteredPlaces(query: String): Flow<List<Place>>
     @Query("SELECT * FROM place WHERE cost BETWEEN :minCost AND :maxCost")
     fun getFilteredByPayment(minCost: Int, maxCost: Int): Flow<List<Place>>
-    @Query("SELECT * FROM place WHERE categoryId = :categoryId")
+    @Query("SELECT * FROM place WHERE categoryId = :categoryId OR :categoryId = ${MainViewModel.ALL_CATEGORIES_ID}")
     fun getFilteredByCategory(categoryId: Int): Flow<List<Place>>
 }
