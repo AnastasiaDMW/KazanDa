@@ -21,6 +21,8 @@ import ru.itis.kazanda.Constant
 import ru.itis.kazanda.data.Place
 import ru.itis.kazanda.data.StateResult
 import ru.itis.kazanda.database.PlaceDatabase
+import java.util.Calendar
+import java.util.Date
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.math.atan2
@@ -37,6 +39,9 @@ class MapViewModel(private val context: Context): ViewModel() {
     private var userLatitude: Double? = null
     private var userLongitude: Double? = null
     private var categoryId: Int? = null
+    private var price: Int = 0
+    private var isTakeTime: Boolean = false
+    var categoryType: String? = null
 
     private val _placeList = MutableLiveData<List<Place>>()
     val placeList: LiveData<List<Place>> = _placeList
@@ -44,17 +49,16 @@ class MapViewModel(private val context: Context): ViewModel() {
     private val _stateResult = MutableStateFlow<StateResult>(StateResult.Loading)
     val stateResult: StateFlow<StateResult> = _stateResult.asStateFlow()
 
-//    private val placesList = listOf(
-//        Place(id = 0, name = "Скай парк", price = 700, latitude = 55.7997229, longitude = 49.1478210, categoryId = 0),
-//        Place(id = 1, name = "Pro coffe.shop", price = 1500, latitude = 55.8010952, longitude = 49.1411095, categoryId = 1),
-//        Place(id = 2, name = "Карл Фукс", price = 0, latitude = 55.7997517, longitude = 49.1299838, categoryId = 2),
-//        Place(id = 3, name = "Исфара", price = 500, latitude = 55.7971999, longitude = 49.1284360, categoryId = 0),
-//        Place(id = 4, name = "Cho", price = 550, latitude = 55.7962009, longitude = 49.1295261, categoryId = 1),
-//        Place(id = 5, name = "Дом-музей В.П.Аксенова", price = 1000, latitude = 55.7954638, longitude = 49.1351423, categoryId = 2),
-//    )
-
     fun setCategoryId(value: Int) {
         categoryId = value
+    }
+
+    fun setPrice(value: Int) {
+        price = value
+    }
+
+    fun setIsTakeTime(value: Boolean) {
+        isTakeTime = value
     }
 
     fun getUserLocation(): Pair<Double?, Double?> {
@@ -73,7 +77,7 @@ class MapViewModel(private val context: Context): ViewModel() {
         }
     }
 
-    fun getData(context: Context, radius: Double, price: Int) {
+    fun getData(context: Context, radius: Double) {
         viewModelScope.launch {
             val (userLat, userLng) = getLocation(context)
             _stateResult.value = findPlacesNearby(userLat, userLng, radius, price)
@@ -115,7 +119,7 @@ class MapViewModel(private val context: Context): ViewModel() {
     private fun findPlacesNearby(
         userLat: Double,
         userLng: Double,
-        radius: Double = 2.0,
+        radius: Double = 1.0,
         price: Int
     ): StateResult {
         return try {
@@ -127,8 +131,18 @@ class MapViewModel(private val context: Context): ViewModel() {
                     val distance = calculateDistance(userLat to userLng, lat to lng, radius)
                     distance <= radius && place.cost <= price
                 }?.filter { place ->
-                    if (categoryId != Constant.categoryList.size) place.categoryId == categoryId
-                    else true
+                    if (categoryId != Constant.categoryList.size) {
+                        place.categoryId == categoryId
+                    }
+                    else {
+                        true
+                    }
+                }?.filter { place ->
+                    if (isTakeTime) {
+                        findOpenPlace(place.hours)
+                    } else {
+                        true
+                    }
                 }
                 filteredList = newList
                 StateResult.Loading
@@ -167,5 +181,31 @@ class MapViewModel(private val context: Context): ViewModel() {
         } else {
             userRadius + 1
         }
+    }
+
+    fun findOpenPlace(placeTime: String): Boolean {
+        return if (placeTime == "Круглосуточно") {
+            true
+        } else {
+            val (startTime, endTime) = placeTime.split(" - ")
+            val currentDate = Date()
+            val startTimeAsLong = parseTimeAsLong(startTime, currentDate)
+            val endTimeAsLong = parseTimeAsLong(endTime, currentDate)
+            val currentTimeAsLong = currentDate.time
+            currentTimeAsLong in startTimeAsLong..endTimeAsLong
+        }
+    }
+
+    fun parseTimeAsLong(time: String, date: Date): Long {
+        val timeParts = time.split(":")
+        val hours = timeParts[0].toInt()
+        val minutes = timeParts[1].toInt()
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.set(Calendar.HOUR_OF_DAY, hours)
+        calendar.set(Calendar.MINUTE, minutes)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        return calendar.timeInMillis
     }
 }

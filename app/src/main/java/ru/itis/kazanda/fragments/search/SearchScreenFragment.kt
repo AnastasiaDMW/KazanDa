@@ -1,6 +1,7 @@
 package ru.itis.kazanda.fragments.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ class SearchScreenFragment : Fragment(R.layout.fragment_search_screen) {
 
     private var binding: FragmentSearchScreenBinding? = null
     private var startMapViewModel: SearchViewModel? = null
+    private var isTakeTime: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,23 +28,18 @@ class SearchScreenFragment : Fragment(R.layout.fragment_search_screen) {
         binding?.run {
             sCategory.adapter = startMapViewModel?.iconTexts?.let { SpinnerAdapter(root.context, it) }
             btnSearch.setOnClickListener {
-                if (etPrice.text.isNullOrBlank()) {
-                    findNavController().navigate(
-                        resId = R.id.action_searchScreenFragment_to_mapScreenFragment,
-                        args = MapScreenFragment.bundle(
-                            categoryType = startMapViewModel!!.iconTexts[sCategory.selectedItemPosition].title,
-                            price = 0
-                        )
+                val price = if (etPrice.text.isNullOrBlank()) 0 else etPrice.text.toString().toInt()
+                findNavController().navigate(
+                    resId = R.id.action_searchScreenFragment_to_mapScreenFragment,
+                    args = MapScreenFragment.bundle(
+                        categoryType = startMapViewModel!!.iconTexts[sCategory.selectedItemPosition].title,
+                        price = price,
+                        isTakeTime = isTakeTime
                     )
-                } else {
-                    findNavController().navigate(
-                        resId = R.id.action_searchScreenFragment_to_mapScreenFragment,
-                        args = MapScreenFragment.bundle(
-                            categoryType = startMapViewModel!!.iconTexts[sCategory.selectedItemPosition].title,
-                            price = etPrice.text.toString().toInt()
-                        )
-                    )
-                }
+                )
+            }
+            cbTime.setOnCheckedChangeListener { buttonView, isChecked ->
+                isTakeTime = if (isChecked) true else false
             }
         }
     }

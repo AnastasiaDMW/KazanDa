@@ -11,4 +11,5 @@ object Constant {
     )
     const val CATEGORY_TYPE = "CATEGORY_TYPE"
     const val PRICE = "PRCIE"
+    const val TIME = "TIME"
 }
