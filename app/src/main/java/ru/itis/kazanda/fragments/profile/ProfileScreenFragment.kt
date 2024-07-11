@@ -3,7 +3,6 @@ package ru.itis.kazanda.fragments.profile
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -11,11 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import ru.itis.kazanda.R
-import ru.itis.kazanda.database.PlaceDatabase
 import ru.itis.kazanda.databinding.FragmentProfileScreenBinding
-import ru.itis.kazanda.fragments.main.MainViewModel
-import ru.itis.kazanda.fragments.main.PlaceRepository
-import ru.itis.kazanda.fragments.map.MapViewModel
 import java.io.File
 
 
@@ -23,23 +18,13 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
 
     private var binding: FragmentProfileScreenBinding? = null
     private var adapter: FavoritePlaceAdapter? = null
-    /*private var profileViewModel: ProfileViewModel? = null*/
-
     private lateinit var profileViewModel: ProfileViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileScreenBinding.bind(view)
-        //database = binding?.root?.context?.let { PlaceDatabase.getDatabase(it) }
-        /*profileViewModel = binding?.root?.context?.let { ProfileViewModel(it) }
-        profileViewModel?.getFavoritePlaces()*/
 
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        profileViewModel.favoriteList.observe(this) { value ->
-            Log.d("TAG", "Значение LiveData: $value")
-        }
-
-        //Log.d("DATA", profileViewModel.favoriteList.toString())
 
         val pref = context?.getSharedPreferences("Default", Context.MODE_PRIVATE)
         val filesDir = requireContext().filesDir
@@ -79,7 +64,6 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
     private fun initAdapter() {
         binding?.apply {
             profileViewModel.favoriteList?.observe(viewLifecycleOwner) { places ->
-                Log.i("TAG2", "Элементы листа: ${places.toString()}")
                 adapter = FavoritePlaceAdapter(
                     list = places,
                     glide = Glide.with(this@ProfileScreenFragment),

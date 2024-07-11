@@ -2,13 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="sub_color_1">#DED9FF</color>
-    <color name="sub_color_2">#C293FF</color>
-    <color name="purple">#5C00FF</color>
     <color name="button_fav_unactivated">#9747FF</color>
     <color name="button_fav_activated">#C293FF</color>
-    <color name="light_grey">#797979</color>
-
     <color name="bottom_nav_text_background">#DED9FF</color> <!-- primary_surface - нижняя навигация + фон текста на детальном экране -->
     <color name="icons_and_common_text">#353164</color> <!-- on_primary_surface -->
     <color name="bright_purple_detail_screen">#9E00FF</color> <!-- on_primary_surface_bright - яркие надписи на детальном экране -->

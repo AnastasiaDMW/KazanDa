@@ -1,6 +1,5 @@
 package ru.itis.kazanda.fragments.profile
 
-import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -8,8 +7,6 @@ import com.bumptech.glide.request.RequestOptions
 import ru.itis.kazanda.R
 import ru.itis.kazanda.data.Favorite
 import ru.itis.kazanda.databinding.ItemFavoritePlaceBinding
-import ru.itis.kazanda.fragments.main.PaymentType
-import ru.itis.kazanda.fragments.main.Place
 
 class FavoritePlaceHolder(
     private val binding: ItemFavoritePlaceBinding,

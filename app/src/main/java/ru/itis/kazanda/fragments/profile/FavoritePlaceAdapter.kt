@@ -2,12 +2,10 @@ package ru.itis.kazanda.fragments.profile
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
 import ru.itis.kazanda.data.Favorite
 import ru.itis.kazanda.databinding.ItemFavoritePlaceBinding
-import ru.itis.kazanda.fragments.main.Place
 
 class FavoritePlaceAdapter(
     private val list: List<Favorite>,
