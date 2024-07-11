@@ -59,10 +59,18 @@
         tools:layout="@layout/fragment_profile_screen" >
         <action
             android:id="@+id/action_profileScreenFragment_to_editScreenFragment"
-            app:destination="@id/editScreenFragment" />
+            app:destination="@id/editScreenFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_profileScreenFragment_to_detailScreenFragment"
-            app:destination="@id/detailScreenFragment" />
+            app:destination="@id/detailScreenFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/editScreenFragment"
@@ -71,6 +79,10 @@
         tools:layout="@layout/fragment_edit_screen" >
         <action
             android:id="@+id/action_editScreenFragment_to_profileScreenFragment"
-            app:destination="@id/profileScreenFragment" />
+            app:destination="@id/profileScreenFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 </navigation>

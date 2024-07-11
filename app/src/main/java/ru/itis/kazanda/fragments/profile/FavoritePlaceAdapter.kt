@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import ru.itis.kazanda.data.Favorite
 import ru.itis.kazanda.databinding.ItemFavoritePlaceBinding
-import ru.itis.kazanda.fragments.main.Place
 
 class FavoritePlaceAdapter(
-    private val list: List<Place>,
+    private val list: List<Favorite>,
     private val glide: RequestManager,
-    private val onClick: (Place) -> Unit,
+    private val profileViewModel: ProfileViewModel,
+    private val onClick: (Favorite) -> Unit,
 ) : RecyclerView.Adapter<FavoritePlaceHolder>() {
 
     override fun onCreateViewHolder(
@@ -23,6 +24,7 @@ class FavoritePlaceAdapter(
             false
         ),
         glide = glide,
+        removePlaceFromFavorites = profileViewModel::removePlaceFromFavorites,
         onClick = onClick,
     )
 

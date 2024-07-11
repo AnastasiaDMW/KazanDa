@@ -5,12 +5,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import ru.itis.kazanda.R
 import ru.itis.kazanda.databinding.FragmentProfileScreenBinding
-import ru.itis.kazanda.fragments.main.PlaceRepository
 import java.io.File
 
 
@@ -18,10 +18,13 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
 
     private var binding: FragmentProfileScreenBinding? = null
     private var adapter: FavoritePlaceAdapter? = null
+    private lateinit var profileViewModel: ProfileViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentProfileScreenBinding.bind(view)
+
+        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         val pref = context?.getSharedPreferences("Default", Context.MODE_PRIVATE)
         val filesDir = requireContext().filesDir
@@ -60,21 +63,25 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
 
     private fun initAdapter() {
         binding?.apply {
-            adapter = FavoritePlaceAdapter(
-                list = PlaceRepository.places,
-                glide = Glide.with(this@ProfileScreenFragment),
-                onClick = {
-                    val bundle = Bundle().apply {
-                        putInt("placeId", it.id)
+            profileViewModel.favoriteList?.observe(viewLifecycleOwner) { places ->
+                adapter = FavoritePlaceAdapter(
+                    list = places,
+                    glide = Glide.with(this@ProfileScreenFragment),
+                    profileViewModel = profileViewModel,
+                    onClick = {
+                        val bundle = Bundle().apply {
+                            putInt("placeId", it.id)
+                        }
+                        findNavController().navigate(
+                            R.id.action_profileScreenFragment_to_detailScreenFragment,
+                            bundle
+                        )
                     }
-                    findNavController().navigate(
-                        R.id.action_profileScreenFragment_to_detailScreenFragment,
-                        bundle
-                    )
-                }
-            )
-            rvFavorite.adapter = adapter
-            rvFavorite.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                )
+                rvFavorite.adapter = adapter
+                rvFavorite.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            }
         }
     }
 
