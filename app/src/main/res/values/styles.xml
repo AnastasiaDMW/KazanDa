@@ -125,4 +125,20 @@
         <item name="android:fontFamily">@font/font_montserrat_regular</item>
     </style>
 
+    <style name="MapCheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:textColor">@color/icons_and_common_text</item>
+        <item name="android:fontFamily">@font/font_montserrat_regular</item>
+    </style>
+
+    <style name="DialogText">
+        <item name="fontFamily">@font/font_montserrat_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/icons_and_common_text</item>
+    </style>
+
+    <style name="CustomEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/icons_and_common_text</item>
+        <item name="android:fontFamily">@font/font_montserrat_regular</item>
+    </style>
+
 </resources>
