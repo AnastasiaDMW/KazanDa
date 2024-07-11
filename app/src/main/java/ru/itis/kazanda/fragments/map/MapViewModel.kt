@@ -21,6 +21,8 @@ import ru.itis.kazanda.Constant
 import ru.itis.kazanda.data.Place
 import ru.itis.kazanda.data.StateResult
 import ru.itis.kazanda.database.PlaceDatabase
+import java.util.Calendar
+import java.util.Date
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.math.atan2
@@ -38,6 +40,7 @@ class MapViewModel(private val context: Context): ViewModel() {
     private var userLongitude: Double? = null
     private var categoryId: Int? = null
     private var price: Int = 0
+    private var isTakeTime: Boolean = false
     var categoryType: String? = null
 
     private val _placeList = MutableLiveData<List<Place>>()
@@ -48,11 +51,14 @@ class MapViewModel(private val context: Context): ViewModel() {
 
     fun setCategoryId(value: Int) {
         categoryId = value
-        Log.d("DATA", "CategoryId: $categoryId")
     }
 
     fun setPrice(value: Int) {
         price = value
+    }
+
+    fun setIsTakeTime(value: Boolean) {
+        isTakeTime = value
     }
 
     fun getUserLocation(): Pair<Double?, Double?> {
@@ -117,27 +123,28 @@ class MapViewModel(private val context: Context): ViewModel() {
         price: Int
     ): StateResult {
         return try {
-            if (!_placeList.value.isNullOrEmpty()) {
-                StateResult.Error("")
+            if (_placeList.value.isNullOrEmpty()) {
+                StateResult.Error("Список пуст")
             } else {
                 val newList = _placeList.value?.filter { place ->
                     val (lat, lng) = place.latitude to place.longitude
                     val distance = calculateDistance(userLat to userLng, lat to lng, radius)
-                    Log.d("DATA", "Стоимость: $price - ${place.cost}")
                     distance <= radius && place.cost <= price
                 }?.filter { place ->
                     if (categoryId != Constant.categoryList.size) {
-                        Log.d("DATA", "${place.title} - зашел в if")
                         place.categoryId == categoryId
                     }
                     else {
-                        Log.d("DATA", "${place.title} - зашел в else")
+                        true
+                    }
+                }?.filter { place ->
+                    if (isTakeTime) {
+                        findOpenPlace(place.hours)
+                    } else {
                         true
                     }
                 }
                 filteredList = newList
-                Log.d("DATA", _placeList.value.toString())
-                Log.d("DATA", "filteredList: $filteredList")
                 StateResult.Loading
             }
         } catch (e: NullPointerException) {
@@ -170,11 +177,35 @@ class MapViewModel(private val context: Context): ViewModel() {
 
             val timeDist = sin(dLat/2) * sin(dLat/2) + cos(Math.toRadians(userLat)) * cos(Math.toRadians(lat)) * sin(dLng/2) * sin(dLng/2)
             val distance = 2* atan2(sqrt(timeDist), sqrt(1-timeDist))
-            Log.d("DATA", "${earthRadius * distance} - радиус")
             earthRadius * distance
         } else {
-            Log.d("DATA", "${userRadius + 1} - радиус")
             userRadius + 1
         }
+    }
+
+    fun findOpenPlace(placeTime: String): Boolean {
+        return if (placeTime == "Круглосуточно") {
+            true
+        } else {
+            val (startTime, endTime) = placeTime.split(" - ")
+            val currentDate = Date()
+            val startTimeAsLong = parseTimeAsLong(startTime, currentDate)
+            val endTimeAsLong = parseTimeAsLong(endTime, currentDate)
+            val currentTimeAsLong = currentDate.time
+            currentTimeAsLong in startTimeAsLong..endTimeAsLong
+        }
+    }
+
+    fun parseTimeAsLong(time: String, date: Date): Long {
+        val timeParts = time.split(":")
+        val hours = timeParts[0].toInt()
+        val minutes = timeParts[1].toInt()
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.set(Calendar.HOUR_OF_DAY, hours)
+        calendar.set(Calendar.MINUTE, minutes)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        return calendar.timeInMillis
     }
 }

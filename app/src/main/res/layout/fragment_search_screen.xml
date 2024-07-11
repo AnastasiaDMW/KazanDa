@@ -23,7 +23,7 @@
         android:id="@+id/sCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +51,17 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <CheckBox
+        android:id="@+id/cbTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
+        android:text="@string/is_oopen_place"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilPrice" />
+
     <Button
         android:id="@+id/btnSearch"
         style="@style/MainButtonTextStyle"
@@ -61,7 +72,7 @@
         android:background="@drawable/button_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilPrice" />
+        app:layout_constraintTop_toBottomOf="@+id/cbTime" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

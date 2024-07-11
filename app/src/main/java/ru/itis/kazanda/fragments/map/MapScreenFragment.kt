@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 import ru.itis.kazanda.Constant
 import ru.itis.kazanda.Constant.CATEGORY_TYPE
 import ru.itis.kazanda.Constant.PRICE
+import ru.itis.kazanda.Constant.TIME
 import ru.itis.kazanda.R
 import ru.itis.kazanda.data.Place
 import ru.itis.kazanda.data.StateResult
@@ -54,11 +55,13 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
         mapViewModel?.setPrice(price)
         val categoryType = arguments?.getString(CATEGORY_TYPE) ?: "ERROR"
         mapViewModel?.categoryType = categoryType
+        val isTakeTime = arguments?.getBoolean(TIME) ?: false
+        mapViewModel?.setIsTakeTime(isTakeTime)
+
         if (mapViewModel?.placeList?.value.isNullOrEmpty()) {
             mapViewModel?.getAllPlaces()
         }
-
-        Log.d("DATA", mapViewModel?.placeList?.value.toString())
+        
         Constant.categoryList.forEachIndexed { index, category ->
             if (category.title == mapViewModel?.categoryType){
                 mapViewModel?.setCategoryId(index)
@@ -82,7 +85,7 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
                     when (result) {
                         is StateResult.Success -> {}
                         is StateResult.Info -> Snackbar.make(binding?.root!!, result.message, Snackbar.LENGTH_LONG).show()
-                        is StateResult.Error -> Snackbar.make(binding?.root!!, result.message, Snackbar.LENGTH_LONG).show()
+                        is StateResult.Error -> mapViewModel?.getData(root.context,0.5)
                         StateResult.Loading -> {
                             delay(1500L)
                             progressDialog?.stop()
@@ -186,9 +189,10 @@ class MapScreenFragment : Fragment(R.layout.fragment_map_screen) {
     }
 
     companion object {
-        fun bundle(categoryType: String, price: Int): Bundle = Bundle().apply {
+        fun bundle(categoryType: String, price: Int, isTakeTime: Boolean): Bundle = Bundle().apply {
             putString(CATEGORY_TYPE, categoryType)
             putInt(PRICE, price)
+            putBoolean(TIME, isTakeTime)
         }
     }
 

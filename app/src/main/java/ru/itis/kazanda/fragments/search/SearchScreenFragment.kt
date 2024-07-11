@@ -13,6 +13,7 @@ class SearchScreenFragment : Fragment(R.layout.fragment_search_screen) {
 
     private var binding: FragmentSearchScreenBinding? = null
     private var startMapViewModel: SearchViewModel? = null
+    private var isTakeTime: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,9 +33,13 @@ class SearchScreenFragment : Fragment(R.layout.fragment_search_screen) {
                     resId = R.id.action_searchScreenFragment_to_mapScreenFragment,
                     args = MapScreenFragment.bundle(
                         categoryType = startMapViewModel!!.iconTexts[sCategory.selectedItemPosition].title,
-                        price = price
+                        price = price,
+                        isTakeTime = isTakeTime
                     )
                 )
+            }
+            cbTime.setOnCheckedChangeListener { buttonView, isChecked ->
+                isTakeTime = if (isChecked) true else false
             }
         }
     }
