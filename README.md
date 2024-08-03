@@ -12,7 +12,7 @@
 * Экран с картой показывает места в радиусе 500 м от местоположения пользователя, так же учитывается стоимость и категории. По нажатию на метку открывается нижняя панель на которой можно посмотреть, что это за место и перейти на экран с подробной информацией.
 
 <div style="display: flex; justify-content: center;">
-  <img src="https://github.com/user-attachments/assets/d9c8b4df-405b-4a15-8e90-7c09849affed" width="200" style="margin-right: 40px;"/>
+  <img src="https://github.com/user-attachments/assets/6bbbd8fc-7e13-4db2-a131-ce310ec26974" width="200" style="margin-right: 40px;"/>
   <img src="https://github.com/user-attachments/assets/41c57b47-786f-4cbe-bf51-fa93d6254805" width="200" style="margin-right: 40px;"/>
   <img src="https://github.com/user-attachments/assets/621ec173-d464-4c6e-8eac-6f2fb388704c" width="200" style="margin-right: 40px;"/>
   <img src="https://github.com/user-attachments/assets/f33eef84-b00c-4f7f-bf11-a8f8b8ed0949" width="200" style="margin-right: 40px;"/>
